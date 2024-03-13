@@ -120,9 +120,10 @@ const CompanyTable = () => {
         )
       },
       {
-        name: "EDIT",
+        name:"ACTIONS",
         selector: (row, index) => (
-          <div
+          <div className='flex justify-between items-center gap-4'>
+            <div
           className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"            onClick={() => {
               setUpdateCompanyModal(true);
               setExistingData(row);
@@ -136,11 +137,6 @@ const CompanyTable = () => {
               <Icon icon="mdi:pencil" fontSize={18} />
             </Tooltip>
           </div>
-        ),
-      },
-      {
-        name: "DELETE",
-        selector: (row, index) => (
           <div
             className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
             onClick={() => {
@@ -154,9 +150,10 @@ const CompanyTable = () => {
               <Icon icon="ic:outline-auto-delete" fontSize={18} />
             </Tooltip>
           </div>
+          </div>
+
         ),
-      },
-      
+      },      
     ];
   return (
     <>

@@ -4,6 +4,7 @@ import DataTable from 'react-data-table-component';
 import { FormControlLabel, FormGroup, Switch, Tooltip } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Modal from '../../../modal/modal';
+import { Link } from "react-router-dom";
 import { Field, Formik } from 'formik';
 
 
@@ -46,13 +47,15 @@ const ManagerTable = () => {
     // password : " "
   };
 
-   
+  const renderDevices = (devices) => {
+    return devices.map((device) => device.name).join(', ');
+  };
     // const fetchData = (searchKey = "", searchTerm = "") => {
     //   getManagers(limit, page, searchTerm, searchKey);
     // };  
     const columns = [
       {
-        name: "firstName",
+        name: "FIRST NAME",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
             {row?.firstName}
@@ -60,7 +63,7 @@ const ManagerTable = () => {
         ),
       },
       {
-        name: "lastName",
+        name: "LAST NAME",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
             {row?.lastName}
@@ -68,7 +71,7 @@ const ManagerTable = () => {
         ),
       },
       {
-        name: "email",
+        name: "EMAIL",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
             {row?.email}
@@ -76,25 +79,44 @@ const ManagerTable = () => {
         ),
       },
       {
-        name: "role",
+        name: "DEVICES",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
-            {row?.role}
+            {renderDevices(row?.deviceId)}
           </p>
+        ),
+      }, 
+      {
+        name: "View Devices",
+        selector: (row, index) => (
+          <Link
+            to={`/${row?.id}/device`}
+            // onClick={() => {
+            //   localStorage.setItem(machineLocation, row?.location);
+            //   localStorage.setItem(imeiMachine, JSON.stringify(row?.machineImei));
+            //   // localStorage.removeItem("vendor_name");
+            // }}
+            className="bg-[#4992FF] text-white hover:bg-[#4992FF] transition-all duration-300 ease-in-out flex justify-center items-center text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+          >
+            <Tooltip
+              placement="bottom"
+              title={
+                <span className="text-base">
+                  Click here to see 's all orders for this machine(
+                  {/* {row?.machineImei}) */}
+                </span>
+              }
+            >
+              <Icon icon="mdi:eye" fontSize={18} />
+            </Tooltip>
+          </Link>
         ),
       },
       {
-        name: "userType",
+        name: "ACTION",
         selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.userType}
-          </p>
-        ),
-      },
-      {
-        name: "Update Manager",
-        selector: (row, index) => (
-          <div
+          <div className='flex justify-between items-center gap-4'>
+            <div
             className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
             onClick={() => {
               setUpdateManagerModal(true);
@@ -111,11 +133,6 @@ const ManagerTable = () => {
               <Icon icon="mdi:pencil" fontSize={18} />
             </Tooltip>
           </div>
-        ),
-      },
-      {
-        name: "Delete Manager",
-        selector: (row, index) => (
           <div
             className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
             onClick={() => {
@@ -129,9 +146,9 @@ const ManagerTable = () => {
               <Icon icon="ic:outline-auto-delete" fontSize={18} />
             </Tooltip>
           </div>
-        ),
-      },
-      
+          </div>
+        )
+      },      
     ];
   return (
     <>

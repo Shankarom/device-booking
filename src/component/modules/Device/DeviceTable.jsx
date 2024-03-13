@@ -5,6 +5,7 @@ import { FormControlLabel, FormGroup, Switch, Tooltip } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Modal from '../../modal/modal';
 import { Field, Formik } from 'formik';
+import moment from 'moment';
 import { updateVendorSchema } from '../../../formik/formikValidationSchema';
 
 
@@ -13,62 +14,72 @@ const DeviceTable = () => {
   const [page, setPage] = useState(1);
   const [existingData, setExistingData] = useState(null);
   const {
-      loading,
-      getDevices,
-      deviceList,
-      updateDeviceDetails, 
-      setUpdateDeviceModal,
-      setDeviceId,
-      updateDeviceModal,
-      deleteDevice,
-      pagination
-    } = useDeviceContext()
+    loading,
+    getDevices,
+    deviceList,
+    updateDeviceDetails,
+    setUpdateDeviceModal,
+    setDeviceId,
+    updateDeviceModal,
+    deleteDevice,
+    pagination
+  } = useDeviceContext()
 
-      const initialValues = {
-        name: existingData?.name || "",
-        // email: existingData?.email || "",
-        // phone: existingData?.phone || "",
-      };
-
-
-    // getting the jwt token from the localstorage:
-    const jwt = (localStorage.getItem("token"));
-    // getting the user type from localstorage :
-    // const user = JSON.parse(localStorage.getItem("role"));
-    // all admins list mapping through api :
-    const deviceLisiting = deviceList && deviceList?.map((item) => item);
+  const initialValues = {
+    name: existingData?.name || "",
+    // email: existingData?.email || "",
+    // phone: existingData?.phone || "",
+  };
 
 
-    useEffect(() => {
-      console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
-      if (jwt) {
-        fetchData(limit, page);
-      }
+  // getting the jwt token from the localstorage:
+  const jwt = (localStorage.getItem("token"));
+  // getting the user type from localstorage :
+  // const user = JSON.parse(localStorage.getItem("role"));
+  // all admins list mapping through api :
+  const deviceLisiting = deviceList && deviceList?.map((item) => item);
+  console.log("🚀 ~ DeviceTable ~ deviceLisiting:", deviceLisiting)
+
+
+  useEffect(() => {
+    console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
+    if (jwt) {
+      fetchData(limit, page);
+    }
   }, [limit, page, jwt]);
-   
-    const fetchData = (searchKey = "", searchTerm = "") => {
-      getDevices(limit, page, searchTerm, searchKey);
-    };  
-    const columns = [
-      {
-        name: "Name",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.name}
-          </p>
-        ),
-      },
-      {
-        name: "Created",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.createdAt}
-          </p>
-        ),
-      },
-      {
-        name: "Update Device",
-        selector: (row, index) => (
+
+  const fetchData = (searchKey = "", searchTerm = "") => {
+    getDevices(limit, page, searchTerm, searchKey);
+  };
+  const columns = [
+    {
+      name: "NAME",
+      selector: (row, index) => (
+        <p className="text-xs 2xl:text-base">
+          {row?.name}
+        </p>
+      ),
+    },
+    {
+      name: "DEVICE TYPE",
+      selector: (row, index) => (
+        <p className="text-xs 2xl:text-base">
+          {row?.deviceType}
+        </p>
+      ),
+    },
+    {
+      name: "LAST ACTIVE",
+      selector: (row, index) => (
+        <p className="text-xs 2xl:text-base">
+          {moment(row?.updatedAt).format('lll')}
+        </p>
+      ),
+    },
+    {
+      name: "Action",
+      selector: (row) => (
+        <div className='flex justify-between items-center gap-4'>
           <div
             className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
             onClick={() => {
@@ -84,84 +95,68 @@ const DeviceTable = () => {
               <Icon icon="mdi:pencil" fontSize={18} />
             </Tooltip>
           </div>
-        ),
-      },
-      {
-        name: (
-          <div>
+          {/* Status */}
+          <div
+            className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+            onClick={async() => {
+              await deleteDevice(row?.id);
+            }}
+          >
             <Tooltip
-              placement="bottom"
-              title={
-                <span className="text-base">
-                  Inactive to block device's account
-                </span>
-              }
+              placement="left"
+              title={<span className="text-base">Delete Device</span>}
             >
-              <p>Status(block/unblock)</p>
+              <Icon icon="ic:outline-auto-delete" fontSize={18} />
             </Tooltip>
           </div>
-        ),
-        selector: (row) => (
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  onClick={async () => {
-                    // await deleteDevice(row?.id, !row?.status);
-                    await deleteDevice(row?.id);
+        </div>
+      ),
+    },
 
-                  }}
-                  // checked={row?.status}
-                />
-              }
-            />
-          </FormGroup>
-        ),
-      },
-    ];
+  ];
   return (
     <>
-    <div className="mx-2">
-      <div className="flex flex-col">
-        <div className="overflow-x-auto">
-          <div className="p-1.5 w-full inline-block align-middle">
-            <div className="overflow-hidden border rounded-lg ">
-            <div className="admin-lists orderListing">
-              <DataTable
-                className="events-lists-table"
-                data={deviceLisiting}
-                columns={columns}
-                striped={true}
-                pagination
-                paginationServer
-                // fixedHeader
-                // highlightOnHover
-                // responsive
-                noDataComponent={<h4>No Device found</h4>}
-                paginationRowsPerPageOptions={[20, 30, 40, 80, 100]}
-                paginationTotalRows={pagination?.totalResults}
-                paginationPerPage={limit}
-                onChangeRowsPerPage={(perPage) => {
-                  setLimit(perPage); 
-                }}
-                onChangePage={(page) => {
-                  setPage(page);
-                }}
-                
-                progressPending={loading}
-                // customStyles={customStyles}
-              />
+      <div className="mx-2">
+        <div className="flex flex-col">
+          <div className="overflow-x-auto">
+            <div className="p-1.5 w-full inline-block align-middle">
+              <div className="overflow-hidden border rounded-lg ">
+                <div className="admin-lists orderListing">
+                  <DataTable
+                    className="events-lists-table"
+                    data={deviceLisiting}
+                    columns={columns}
+                    striped={true}
+                    pagination
+                    paginationServer
+                    // fixedHeader
+                    // highlightOnHover
+                    // responsive
+                    noDataComponent={<h4>No Device found</h4>}
+                    paginationRowsPerPageOptions={[20, 30, 40, 80, 100]}
+                    paginationTotalRows={pagination?.totalResults}
+                    paginationPerPage={limit}
+                    onChangeRowsPerPage={(perPage) => {
+                      setLimit(perPage);
+                    }}
+                    onChangePage={(page) => {
+                      setPage(page);
+                    }}
+
+                    progressPending={loading}
+                  // customStyles={customStyles}
+                  />
+                </div>
+              </div>
             </div>
-            </div>  
           </div>
         </div>
       </div>
-    </div>
-    {updateDeviceModal && (
+      {updateDeviceModal && (
         <Modal
           updateDeviceModal={updateDeviceModal}
           title="Update Device"
-          className= "w-[10px]"
+          className="w-[10px]"
           closeIcon={() => {
             setUpdateDeviceModal(false);
           }}
@@ -174,10 +169,10 @@ const DeviceTable = () => {
                   if (!values || typeof values !== "object") {
                     return;
                   }
-                  let changed = {}; 
-                  let i 
+                  let changed = {};
+                  let i
                   Object.keys(values).forEach((ind) => {
-                     i = values[ind]
+                    i = values[ind]
                     if (i !== initialValues?.[ind]) {
                       changed = {
                         ...changed,
@@ -281,7 +276,6 @@ const DeviceTable = () => {
         />
       )}
     </>
-    
   );
 };
 
