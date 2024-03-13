@@ -85,7 +85,7 @@ const ManagerTable = () => {
             {renderDevices(row?.deviceId)}
           </p>
         ),
-      },
+      }, 
       {
         name: "View Devices",
         selector: (row, index) => (
