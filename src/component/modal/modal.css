@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+
+.parentDiv {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  z-index: 111111111111;
+}
+
+.newCustomPopup .inner_box {
+  background: #fff;
+  border: none;
+  border-radius: 7px;
+  height: auto;
+  max-width: 367px;
+  padding: 30px 20px;
+  z-index: 11111111111;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px !important;
+  position: relative;
+  text-align: center;
+  width: inherit;
+}
+
+.newCustomPopup .inner_box > img {
+  border: 2px solid #c3a119;
+  border-radius: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.newCustomPopup .inner_box .qrCode_img {
+  border: none !important;
+  border-radius: 0px !important;
+  width: 100%;
+  height: 100% !important;
+  margin-bottom: 0 !important;
+}
+
+.newCustomPopup .inner_box .customer-list {
+  display: none;
+}
+
+.newCustomPopup .inner_box .title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.newCustomPopup .inner_box .description {
+  color: #636c80 !important;
+  font-size: 14px;
+  text-align: center;
+}
+
+.parentDiv.newCustomPopup .button,
+.popupCustomBtn {
+  background-color: rgba(8, 126, 164, 1);
+  border: 2px solid rgba(8, 126, 164, 1);
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+  padding: 8px 19px;
+  margin: 10px 5px 0;
+  max-width: 140px;
+  width: 100%;
+}
+
+.parentDiv.newCustomPopup .button:hover,
+.popupCustomBtn:hover,
+.parentDiv.newCustomPopup .button:focus,
+.popupCustomBtn:focus {
+  background-color: #fff;
+  outline: none !important;
+  color: rgba(8, 126, 164, 1);
+  outline: none !important;
+  cursor: pointer;
+}
+
+.dropBoxWaterMark {
+  background-color: white !important;
+  color: rgba(8, 126, 164, 1) !important;
+  border: dashed #ff8254;
+  margin: 1rem 0;
+  padding: 40px 30px;
+  cursor: pointer;
+}
+
+.dropBoxWaterMark p {
+  margin-bottom: 0 !important;
+}
+
+.dropBox {
+  padding: 40px 30px;
+  border: dashed #ff8254;
+  background-color: rgba(8, 126, 164, 1);
+  color: white;
+  margin: 1rem 0;
+}
+
+.description span {
+   margin: 1rem 0; 
+  font-size: 15px;
+}
+
+.parentDiv.newCustomPopup .crossIcon,
+.parentDiv.newCustomPopup .openFeedbackModal .crossIcon {
+  cursor: pointer;
+  height: 30px;
+  position: absolute;
+  right: -40px;
+  top: -30px;
+  width: 30px;
+}
+.parentDiv.newCustomPopup .crossIcon:before,
+.parentDiv.newCustomPopup .openFeedbackModal .crossIcon::before {
+  background-color: #fff;
+  content: "";
+  display: block;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+.parentDiv.newCustomPopup .crossIcon:before,
+.parentDiv.newCustomPopup .openFeedbackModal .crossIcon::before {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+.parentDiv.newCustomPopup .crossIcon:after,
+.parentDiv.newCustomPopup .openFeedbackModal .crossIcon::after {
+  background-color: #fff;
+  content: "";
+  display: block;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+.openFeedbackModal {
+  height: 600px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 0 !important;
+  background: #fff;
+  border: none;
+  border-radius: 7px;
+  height: auto;
+  min-width: 500px;
+  max-width: 500px;
+  padding: 30px 20px;
+  z-index: 11111111111;
+  position: relative;
+  text-align: center;
+}
+.buttonbox {
+  width: 100% !important;
+}
+
+.parentDiv.newCustomPopup .crossIcon:after {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
