@@ -1,5 +1,4 @@
 import httpService from "./httpService";
-
 export const DashboardService = {
     GetDashboardData: () =>
     new Promise(async (resolve, reject) => {
