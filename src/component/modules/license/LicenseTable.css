@@ -1,0 +1,281 @@
+.events-lists .huUFBA {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .expanded-event-by-admin {
+    padding-left: 300px;
+    padding-top: 10px;
+  }
+  .backArrow {
+    cursor: pointer;
+  }
+  .expanded-admin {
+    padding-left: 300px;
+  }
+  .admin-lists {
+    margin: 20px 0px;
+    box-shadow: 0px 7px 16px #0000001c;
+    border-radius: 5px;
+  }
+  .orderListing .events-lists-table {
+    max-height: 60vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  .events-lists {
+    width: 100% !important;
+    box-shadow: 0 3px 6px #0000001c;
+    margin: 20px 10px;
+  }
+  
+  .search-main {
+    align-items: center;
+    display: flex;
+    position: relative;
+  }
+  
+  .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked
+    + .MuiSwitch-track {
+    background-color: rgba(8, 126, 164, 1) !important;
+  }
+  
+  .MuiSwitch-colorPrimary.Mui-checked {
+    color: white !important;
+  }
+  
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+    .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(8, 126, 164, 1) !important;
+  }
+  
+  .search-main .search-icon {
+    color: #dcdcdc;
+    position: absolute;
+    top: 13px;
+    left: 7px;
+  }
+  
+  .search-main a {
+    text-decoration: none;
+    text-align: center;
+    padding: 11px 22px;
+    color: white;
+    font-weight: 600;
+    border: 1px solid rgba(8, 126, 164, 1);
+    text-transform: uppercase;
+    border-radius: 7px;
+    margin-left: 15px;
+    background-color: rgba(8, 126, 164, 1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .search-main a:hover,
+  .search-main a:focus {
+    background-color: white;
+    color: rgba(8, 126, 164, 1);
+    border: 1px solid rgba(8, 126, 164, 1);
+    outline: none !important;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .account-act-deac {
+    color: #fff !important;
+    background-color: rgba(8, 126, 164, 1) !important;
+    border: 2px solid rgba(8, 126, 164, 1) !important;
+    border-radius: 7px;
+    outline: none;
+  }
+  
+  .dashboard-inner .top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .admin-lists .loader-main {
+    position: relative;
+    left: 50%;
+    height: 60vh;
+    transform: translate(-35%, 0%);
+  }
+  
+  .dashboard-inner .filter-select {
+    width: 240px;
+  }
+  .events-lists-table .rdt_Table {
+    padding: 0 1rem !important;
+  }
+  .rdt_TableHead {
+    margin: 1rem 0rem;
+    margin-bottom: 0 !important;
+  }
+  .rdt_TableHeadRow {
+    border: none !important;
+  }
+  .rdt_TableHead div {
+    color: #333333 !important;
+    font-size: 14px;
+    line-height: 25px;
+    justify-content: center !important;
+    font-weight: 500;
+  }
+  .rdt_TableRow {
+    background-color: white !important;
+  }
+  .rdt_TableCol {
+    color: #333;
+    background-color: #f0ebff;
+    font-size: 16px;
+    padding: 10px 20px !important;
+    font-weight: 500;
+    justify-content: center;
+    text-align: center !important;
+  }
+  .rdt_TableCol:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .rdt_TableCol:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .status-active,
+  .account-act-deac {
+    background-color: rgba(8, 126, 164, 1);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 7px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    min-width: 96px;
+    cursor: pointer;
+  }
+  
+  .gSVZoG {
+    justify-content: center;
+  }
+  
+  .gSVZoG {
+    font-size: 16px;
+  }
+  
+  .status-exp {
+    background-color: rgba(8, 126, 164, 1);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 7px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .header-right input {
+    padding: 15px 30px !important;
+    padding-right: 11px !important;
+  }
+  
+  .rdt_TableHeadRow span {
+    color: #000000 !important;
+    font-size: 1px;
+    opacity: 0.5;
+  }
+  
+  .rdt_TableRow {
+    border-bottom: grey;
+  }
+  
+  .subscription {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  #react-select-2-listbox {
+    z-index: 9999;
+  }
+  
+  .subscription .start-date,
+  .end-date {
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+  
+  .subscription .end-date {
+    margin-bottom: 0;
+  }
+  
+  .subscription .start-date span {
+    font-weight: 600;
+    margin-left: 10px;
+    font-size: 15px;
+  }
+  
+  .subscription .end-date span {
+    font-weight: 600;
+    margin-left: 18px;
+    font-size: 15px;
+  }
+  
+  .table > :not(caption) {
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+    padding: 0.5rem;
+  }
+  @media (max-width: 1280px) and (min-width: 300px) {
+    .rdt_TableHead div {
+      font-size: 12px !important;
+    }
+  }
+  @media (max-width: 768px) and (min-width: 500px) {
+    .events-lists {
+      overflow: auto;
+      width: 100% !important;
+      scroll-behavior: smooth;
+    }
+  }
+  
+  @media (max-width: 500px) and (min-width: 300px) {
+    .events-lists {
+      overflow: auto;
+      width: 400px !important;
+      scroll-behavior: smooth;
+    }
+  
+    .events-lists .gSVZoG {
+      min-width: 200px !important;
+    }
+  
+    .events-lists .gSVZoG:nth-child(1) {
+      min-width: 100px !important;
+    }
+    .events-lists .event-name {
+      width: 140px !important;
+    }
+  }
+  
+  .events-lists .ihCgAW {
+    justify-content: flex-start !important;
+  }
+  
+  @media (max-width: 375px) and (min-width: 300px) {
+    .events-lists {
+      width: 550px !important;
+    }
+  
+    .header-area a,
+    .header-area .header-right .input-control {
+      width: auto !important;
+    }
+  }
+  
+  .send-images {
+    box-shadow: 0px 0px 4px 0px rgba(15, 105, 64, 0.25) !important;
+  }
+  
