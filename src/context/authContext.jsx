@@ -73,7 +73,8 @@ export const AuthProvider = ({ children }) => {
       };
 
     return (
-        <AuthContext.Provider value={{
+        <AuthContext.Provider 
+        value={{
           handleLogin,
           setDeviceId,
           handleLogout,

@@ -82,9 +82,12 @@ export default function CommonSideBar() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Perform sign-out logic here, such as clearing tokens, etc.
-    // After sign out, you can redirect the user to the login page or perform any other necessary action.
-    console.log("Sign out logic goes here...");
+      // Proceed with logout
+      // localStorage.removeItem(role);
+      // localStorage.removeItem(userDetails);
+      localStorage.removeItem("token");
+      // navigating the user to the login page after logout
+      navigate("/dashboard");
   };
 
   return (
