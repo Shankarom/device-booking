@@ -41,6 +41,10 @@ function App() {
             <Route path='/company' element={<CompanyScreen/>} />
             <Route path='/license' element={<LicenseScreen />} />
             <Route path='/dashboard' element={<DashboardScreen/>} />
+            <Route
+                          path="/:deviceId/device"
+                          element={<DeviceScreen />}
+                        />
           </Routes>
           </DashboardProvider>
           </LicenseProvider>
