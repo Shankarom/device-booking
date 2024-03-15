@@ -1,7 +1,7 @@
 import httpService from "./httpService";
 
 export const DeviceService = {
-    AddDevice: (data) =>
+      AddDevice: (data) =>
       new Promise(async (resolve, reject) => {
         try {
           const response = await httpService.post("device", data);
@@ -10,7 +10,7 @@ export const DeviceService = {
           reject(error);
         }
       }),
-    getDevice: () =>
+      getDevice: () =>
       new Promise(async (resolve, reject) => {
         try {
           const response = await httpService.get("device");
@@ -19,7 +19,6 @@ export const DeviceService = {
           reject(error);
         }
       }),
-
       updateDevice: (updatedFields, deviceId) =>
       new Promise(async (resolve, reject) => {
         try {
@@ -38,4 +37,24 @@ export const DeviceService = {
           reject(error);
         }
       }),
+      getDeviceByManager: (managerId) =>
+      new Promise(async (resolve, reject) => {
+        try {
+          const response = await httpService.get(`manager/devices/${managerId.managerId}`);
+          resolve(response);
+          console.log("🚀  newPromise  response:", response)
+        } catch (error) {
+          reject(error);
+        }
+      }),
+      deviceSearching:(value) =>
+      new Promise(async (resolve, reject) => {
+        try {
+          const response = await httpService.get(`device/?search=${value}`);
+          resolve(response);
+        } catch (error) {
+          reject(error);
+        }
+      }),
+
     }

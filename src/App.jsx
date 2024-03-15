@@ -18,6 +18,8 @@ import DashboardItem from './component/modules/dashBoard';
 import DashboardScreen from './pages/dashboard/adminDashboard'
 import { ToggleContextProvider } from './context/ToogleContext';
 import { DashboardProvider } from './context/dashBoardContext';
+import BookingScreen from './pages/bookings/booking';
+import { BookingProvider } from './context/bookingContext';
 
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
          <CompanyProvider>
          <LicenseProvider>
           <DashboardProvider>
-          <Routes>
+            <BookingProvider>
+            <Routes>
             <Route path='*' element={<OnBoarding />} />
             <Route path='/addDevice' element={<AddDevice />} />
             <Route path='/addLicense' element={<AddLicense />} />
@@ -40,8 +43,11 @@ function App() {
             <Route path='/manager' element={<ManagersScreen />} />
             <Route path='/company' element={<CompanyScreen/>} />
             <Route path='/license' element={<LicenseScreen />} />
-            <Route path="/dashboard" element={<DashboardScreen/>} />
+            <Route path='/dashboard' element={<DashboardScreen/>} />
+            <Route path='/booking' element = {<BookingScreen/>}/>
+            <Route path="/device/:deviceId" element={<DeviceScreen />}/>
           </Routes>
+          </BookingProvider>
           </DashboardProvider>
           </LicenseProvider>
           </CompanyProvider>

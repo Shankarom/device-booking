@@ -47,12 +47,6 @@ const ManagerTable = () => {
     // password : " "
   };
 
-  const renderDevices = (devices) => {
-    return devices.map((device) => device.name).join(', ');
-  };
-    // const fetchData = (searchKey = "", searchTerm = "") => {
-    //   getManagers(limit, page, searchTerm, searchKey);
-    // };  
     const columns = [
       {
         name: "FIRST NAME",
@@ -78,19 +72,19 @@ const ManagerTable = () => {
           </p>
         ),
       },
-      {
-        name: "DEVICES",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {renderDevices(row?.deviceId)}
-          </p>
-        ),
-      }, 
+      // {
+      //   name: "DEVICES",
+      //   selector: (row, index) => (
+      //     <p className="text-xs 2xl:text-base">
+      //       {renderDevices(row?.deviceId)}
+      //     </p>
+      //   ),
+      // }, 
       {
         name: "View Devices",
         selector: (row, index) => (
           <Link
-            to={`/${row?.id}/device`}
+            to={`/device/${row?.id}`}
             // onClick={() => {
             //   localStorage.setItem(machineLocation, row?.location);
             //   localStorage.setItem(imeiMachine, JSON.stringify(row?.machineImei));
@@ -102,7 +96,7 @@ const ManagerTable = () => {
               placement="bottom"
               title={
                 <span className="text-base">
-                  Click here to see 's all orders for this machine(
+                  Click here to see 's all orders for this machine
                   {/* {row?.machineImei}) */}
                 </span>
               }

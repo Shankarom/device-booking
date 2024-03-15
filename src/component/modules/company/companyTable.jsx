@@ -49,13 +49,13 @@ const CompanyTable = () => {
 
   const initialValues = {
     companyName: existingData?.companyName || "",
-    companyType: existingData?.companyType || "",
-    website: existingData?.website || "",
-    email: existingData?.email || "",
+    // companyType: existingData?.companyType || "",
+    // website: existingData?.website || "",
+    // email: existingData?.email || "",
     address: existingData?.address || "",
-    industry: existingData?.industry || "",
-    founded: existingData?.founded || "",
-    companyHead: existingData?.companyHead || "",
+    // industry: existingData?.industry || "",
+    // founded: existingData?.founded || "",
+    // companyHead: existingData?.companyHead || "",
   };
 
    
@@ -79,14 +79,14 @@ const CompanyTable = () => {
           </p>
         ),
       },
-      {
-        name: "COMPANY TYPE",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.companyType}
-          </p>
-        ),
-      },
+      // {
+      //   name: "COMPANY TYPE",
+      //   selector: (row, index) => (
+      //     <p className="text-xs 2xl:text-base">
+      //       {row?.companyType}
+      //     </p>
+      //   ),
+      // },
       {
         name: "EMAIL",
         selector: (row, index) => (
@@ -103,22 +103,22 @@ const CompanyTable = () => {
           </p>
         ),
       },
-      {
-        name:"INDUSTRY",
-        selector:(row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.industry}
-            </p>
-        )
-      },
-      {
-        name:"COMPANY HEAD",
-        selector: (row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.companyHead}
-            </p>
-        )
-      },
+      // {
+      //   name:"INDUSTRY",
+      //   selector:(row, index) =>(
+      //       <p className='text-as 2xl:text-base'>
+      //           {row?.industry}
+      //       </p>
+      //   )
+      // },
+      // {
+      //   name:"COMPANY HEAD",
+      //   selector: (row, index) =>(
+      //       <p className='text-as 2xl:text-base'>
+      //           {row?.companyHead}
+      //       </p>
+      //   )
+      // },
       {
         name:"ACTIONS",
         selector: (row, index) => (
@@ -167,7 +167,7 @@ const CompanyTable = () => {
                 className="events-lists-table"
                 data={[...companyLisiting]}
                 columns={columns}
-                // striped={true}
+                striped={true}
                 pagination
                 paginationServer                
                 // fixedHeader
@@ -178,7 +178,7 @@ const CompanyTable = () => {
                 paginationTotalRows={pageDetails?.totalResults}
                 paginationPerPage={limit}
                 onChangeRowsPerPage={(perPage) => {
-                  {console.log("pageDetails?.totalResults",pageDetails?.totalResults)}
+                  {console.log("pageDetails?.totalResults _______",pageDetails?.totalResults)}
                   localStorage.setItem("limit", perPage);
                   // setLimit(parseInt(perPage, 10));                 
                 }}
