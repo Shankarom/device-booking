@@ -1,29 +1,30 @@
 import {createContext, useContext, useState} from 'react';
 import toast from "react-hot-toast"
 import { useNavigate } from 'react-router-dom';
-import { DashboardService } from "../component/apiServices/dashboardService";
+import { DashboardService } from "../component/apiServices/dashBoardService";
 
 const DashboardContext = createContext()
 
 export const DashboardProvider = ({children}) =>{
     const [loading, setLoading] = useState(false)
-    const [dashboardData, setDashboardData] = useState([])
+    const [deviceCount, setDeviceCount] = useState([])
+    const [bookinglist, setBookinglist] = useState([])
 
 
 
-    const getDashboardData = async () =>{
-        setLoading(true)
+    const getDashboardDevice = async () =>{
+        setLoading(false)
         try{
-            const DashboardData = await DashboardService.GetDashboardData()
-            console.log("🚀 ~ getDashboardData ~ DashboardData:", DashboardData)
-            if(DashboardData.data.success === true){
-                setDashboardData(DashboardData.data.result)
+            const DashboardDevice = await DashboardService.DashboardDevice()
+            if(DashboardDevice.data.success === true){
+                setDeviceCount(DashboardDevice.data.result.device)
+                setBookinglist(DashboardDevice.data.result.bookingDetails)
                 // setPageDetails(getCompany?.data?.result?.pageDetails)
     
             }
             else{
-                setDashboardData([])
-            toast.error(DashboardData.data.message);
+                setDeviceCount([])
+            toast.error(DashboardDevice.data.message);
             }
     
         }catch(error){
@@ -33,9 +34,10 @@ export const DashboardProvider = ({children}) =>{
     return(
         <DashboardContext.Provider
         value={{
-            setDashboardData,
-            getDashboardData,
-            dashboardData
+            setDeviceCount,
+            getDashboardDevice,
+            deviceCount,
+            bookinglist
         }}
         >
             {children}

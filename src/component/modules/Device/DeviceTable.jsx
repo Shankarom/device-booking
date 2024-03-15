@@ -310,7 +310,6 @@ const fetchData = (searchKey = "", searchTerm = "") => {
         />
       )}
     </>
-
   );
 };
 

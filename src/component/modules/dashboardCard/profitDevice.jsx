@@ -1,59 +1,18 @@
-// import { useDashboardContext } from "../../../context/dashboardContext";
-// const {
-//   dashboradDataListList,
-//   GetCompany,
-//   loading,
-//   setLoading,
-// } = useDashboardContext()
-
-const brandData = [
-  {
-    // logo: Tablet,
-    name: 'Tablet',
-    visitors: 3.5,
-    revenues: '5,768',
-    sales: 590,
-    // conversion: 4.8,
-  },
-  {
-    // logo: BrandTwo,
-    name: 'Mobile',
-    visitors: 2.2,
-    revenues: '4,635',
-    sales: 467,
-    // conversion: 4.3,
-  },
-  {
-    // logo: BrandThree,
-    name: 'Desktop',
-    visitors: 2.1,
-    revenues: '4,290',
-    sales: 420,
-    // conversion: 3.7,
-  },
-  {
-    // logo: BrandFour,
-    name: 'Microwave',
-    visitors: 1.5,
-    revenues: '3,580',
-    sales: 389,
-    // conversion: 2.5,
-  },
-  {
-    // logo: BrandFive,
-    name: 'Led tv',
-    visitors: 3.5,
-    revenues: '6,768',
-    sales: 390,
-    // conversion: 4.2,
-  },
-];
+import React, { useContext, useEffect } from "react";
+import { useDashboardContext } from "../../../context/dashBoardContext";
+import moment from 'moment';
 
 const TableOne = () => {
+  const { getDashboardDevice, bookinglist } = useDashboardContext();
+
+  useEffect(() => {
+    getDashboardDevice();
+  }, []);
+
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        Top Device
+        Booking Details
       </h4>
 
       <div className="flex flex-col">
@@ -65,58 +24,52 @@ const TableOne = () => {
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
+              User Name
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
+              Email
             </h5>
           </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+          <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              {/* Conversion */}
+              Timings
             </h5>
           </div>
         </div>
 
-        {brandData.map((brand, key) => (
+        {bookinglist.map((booking, index) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-5 ${
-              key === brandData.length - 1
-                ? ''
-                : 'border-b border-stroke dark:border-strokedark'
+              index === bookinglist.length - 1
+                ? ""
+                : "border-b border-stroke dark:border-strokedark"
             }`}
-            key={key}
+            key={index}
           >
-            <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <div className="flex-shrink-0">
-                {/* <img src={brand.logo} alt="Brand" /> */}
-              </div>
-              <p className="hidden text-black dark:text-white sm:block">
-                {brand.name}
+            <div className="flex items-center p-2.5 xl:p-5">
+              <p className="text-black dark:text-white">
+                {booking.deviceName}
               </p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
+              <p className="text-black dark:text-white">
+                {booking?.bookings[0]?.userDetails.firstName}{" "}
+                {booking?.bookings[0]?.userDetails.lastName}
+              </p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">${brand.revenues}</p>
+              <p className="text-black dark:text-white">
+                {booking?.bookings[0]?.userDetails.email}
+              </p>
             </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{brand.sales}</p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              {/* <p className="text-meta-5">{brand.conversion}%</p> */}
+            <div className="flex items-center justify-center p-2.5 xl:p-5">
+              <p className="text-black dark:text-white">
+              {`${moment(booking?.bookings[0]?.startTime).format("MMM D h:mm a")}--${moment(booking?.bookings[0]?.endTime).format("h:mm a")}`}
+              </p>
             </div>
           </div>
         ))}

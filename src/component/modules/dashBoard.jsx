@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from "react";
 import ThreeDRotation from "@mui/icons-material/ThreeDRotation";
 import { Input, Card, Typography } from "@mui/material";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
@@ -13,31 +13,19 @@ import { useToggleContext } from "../../context/ToogleContext";
 import ChartTwo from "./dashboardCard/profitChart";
 import ChartThree from "./dashboardCard/visitorAnalysis";
 import TableOne from "./dashboardCard/profitDevice";
-import { useDashboardContext } from "../../context/dashboardContext";
+import {useDashboardContext} from  "../../context/dashBoardContext" 
 
 
 const DashboardItem = () => {
-  const {
-    dashboardData,
-    getDashboardData
-  } = useDashboardContext()
-    console.log("🚀 ~ DashboardItem ~ dashboardData:", dashboardData.device.totalDevices)
-  // const data = dashboardData && dashboardData?.map((item) => item);
-  // console.log("🚀 ~ dashboardData:", data)
-  const jwt = (localStorage.getItem("token"));
-  useEffect(() => {
-    // console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
-    if (jwt) {
-      fetchData();
-    }
-}, []);
-const fetchData = () => {
-  getDashboardData();
-};  
+  let  {getDashboardDevice, deviceCount} = useDashboardContext()
+  console.log("🚀 ~ DashboardItem ~ deviceCount:", deviceCount)
+  useEffect(() =>{
+    getDashboardDevice()
+  },[])
+
   const cardData = [
-    {
-      title: "Total Devices",value: dashboardData.device.totalDevices, trend: -3, icon: CheckCircleIcon },
-    { title: "Available Devices", value: "120", trend: -3, icon: CheckCircleIcon },
+    { title: "Total Devices", value: deviceCount.totalDevices, trend: 5, icon: ThreeDRotation },
+    { title: "Active Devices", value: deviceCount.activeDevices, trend: -3, icon: CheckCircleIcon },
     { title: "Booked Devices", value: "130", trend: 10, icon: CalendarTodayIcon },
     { title: "Mobile Devices", value: "350", trend: 10, icon: TabletIcon },
    

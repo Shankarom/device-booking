@@ -15,7 +15,6 @@ export const LicenseService = {
       new Promise(async (resolve, reject) => {
         try {
           const response = await httpService.get('license');
-          console.log("🚀 ~ newPromise ~ response:", response)
           resolve(response);
         } catch (error) {
           reject(error);
