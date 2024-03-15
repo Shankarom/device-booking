@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react';
 import Modal from '../../modal/modal';
 import { Field, Formik,Form } from 'formik';
 import { updateCompanySchema } from '../../../formik/formikValidationSchema';
+import { Link } from "react-router-dom";
 import { customStyles } from '../../../utils/utils';
 
 
@@ -80,14 +81,6 @@ const CompanyTable = () => {
         ),
       },
       {
-        name: "COMPANY TYPE",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.companyType}
-          </p>
-        ),
-      },
-      {
         name: "EMAIL",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
@@ -104,20 +97,25 @@ const CompanyTable = () => {
         ),
       },
       {
-        name:"INDUSTRY",
-        selector:(row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.industry}
-            </p>
-        )
-      },
-      {
-        name:"COMPANY HEAD",
-        selector: (row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.companyHead}
-            </p>
-        )
+        name: "VIEW USERS",
+        selector: (row, index) => (
+          <Link
+            to={`/user/${row?.id}`}
+            className="bg-[#4992FF] text-white hover:bg-[#4992FF] transition-all duration-300 ease-in-out flex justify-center items-center text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+          >
+            <Tooltip
+              placement="bottom"
+              title={
+                <span className="text-base">
+                  Click here to see 's all users for this company(
+                  {row?.companyName})
+                </span>
+              }
+            >
+              <Icon icon="mdi:eye" fontSize={18} />
+            </Tooltip>
+          </Link>
+        ),
       },
       {
         name:"ACTIONS",

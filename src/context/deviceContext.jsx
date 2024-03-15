@@ -11,6 +11,7 @@ export const DeviceProvider = ({ children }) => {
     const [updateDeviceModal, setUpdateDeviceModal] = useState(false);
     const [deleteDeviceModal, setDeleteDeviceModal] = useState(false);
     const [pagination, setPagination] = useState([])
+    // const [machineOrders, setMachineOrders] = useState([]);
 
     const [deviceList, setDeviceList] = useState([]);
     const [deviceId, setDeviceId] = useState("");
@@ -133,7 +134,36 @@ export const DeviceProvider = ({ children }) => {
             toast.error("An error occurred while deleting the device");
           }
         }
-      };
+    };
+
+    const getVendorAndMachineOrders = async (
+      managerId,
+      limit,
+      page
+    ) => {
+      try {
+        // Assuming getOrderByDate returns a promise
+        const getVendorAndMachineOrder =
+        await DeviceService.getVendorAndMachineOrder({
+          managerId,
+          pageSize: limit,
+          page,
+        });
+        // console.log("🚀 ~ DeviceProvider ~ getVendorAndMachineOrder:", getVendorAndMachineOrder)
+        if (getVendorAndMachineOrder.data.success == true) {
+          // setMachineOrders(getVendorAndMachineOrder?.data?.result?.results);
+          setDeviceList(getVendorAndMachineOrder?.data?.result?.results);
+          // setPageDetails(getVendorAndMachineOrder.data.pageDetails);
+        } else {
+          // setMachineOrders([]);
+          setDeviceList([]);
+          // setPageDetails(null);
+        }
+      } catch (error) {
+        // Handle errors
+        console.error("Error fetching orders between dates:", error);
+      }
+    };
 
     return (
         <DeviceContext.Provider
@@ -149,7 +179,8 @@ export const DeviceProvider = ({ children }) => {
                 getDevices,
                 updateDeviceDetails,
                 setUpdateDeviceModal,
-                deleteDevice
+                deleteDevice,
+                getVendorAndMachineOrders
             }}
         >
             {children}

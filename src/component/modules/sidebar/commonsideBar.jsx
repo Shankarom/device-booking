@@ -160,6 +160,21 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/user")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText primary="user" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/booking")}>
             <ListItemButton
               sx={{

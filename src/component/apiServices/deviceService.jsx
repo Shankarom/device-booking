@@ -38,4 +38,14 @@ export const DeviceService = {
           reject(error);
         }
       }),
+      getVendorAndMachineOrder: (managerId) =>
+      new Promise(async (resolve, reject) => {
+        try {
+          const response = await httpService.get(`manager/devices/${managerId.managerId}`);
+          resolve(response);
+          console.log("🚀 ~ newPromise ~ response:", response)
+        } catch (error) {
+          reject(error);
+        }
+      }),
     }

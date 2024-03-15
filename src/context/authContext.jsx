@@ -23,11 +23,13 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
           const loginApi = await AuthService.login(loginData);
+          console.log("🚀 ~ handleLogin ~ loginApi:", loginApi)
           if (loginApi.data.success === true) {
             setLoading(false);
             toast.success(loginApi.data.message);
             console.log(loginApi.data,'loginApi.data')
             localStorage.setItem('token',loginApi.data.data.tokens.refresh.token)
+            localStorage.setItem('userType',loginApi.data.data.user.userType)
             navigate("/dashboard");
             // role(loginApi.data.data.user.role)
         //     if (loginApi.data.user.roles[0] === "admin") {

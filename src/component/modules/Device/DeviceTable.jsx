@@ -7,14 +7,22 @@ import Modal from '../../modal/modal';
 import { Field, Formik } from 'formik';
 import moment from 'moment';
 import { updateVendorSchema } from '../../../formik/formikValidationSchema';
+import { useParams, useNavigate } from "react-router-dom";
 
 
 const DeviceTable = () => {
+  const params = useParams();
+
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [existingData, setExistingData] = useState(null);
+  
+  const [result, setResult] = useState([]);
+  const [pageDetails, setPageDetails] = useState([]);
+
   const {
     loading,
+    // setLoading,
     getDevices,
     deviceList,
     updateDeviceDetails,
@@ -22,7 +30,8 @@ const DeviceTable = () => {
     setDeviceId,
     updateDeviceModal,
     deleteDevice,
-    pagination
+    pagination,
+    getVendorAndMachineOrders
   } = useDeviceContext()
 
   const initialValues = {
@@ -30,27 +39,52 @@ const DeviceTable = () => {
     // email: existingData?.email || "",
     // phone: existingData?.phone || "",
   };
-
+  let deviceLisiting
 
   // getting the jwt token from the localstorage:
   const jwt = (localStorage.getItem("token"));
-  // getting the user type from localstorage :
-  // const user = JSON.parse(localStorage.getItem("role"));
-  // all admins list mapping through api :
-  const deviceLisiting = deviceList && deviceList?.map((item) => item);
-  console.log("🚀 ~ DeviceTable ~ deviceLisiting:", deviceLisiting)
+  deviceLisiting = deviceList && deviceList?.map((item) => item);
+  // deviceLisiting = machineOrders && machineOrders?.map((item) => item);
 
+
+
+  // useEffect(() => {
+  //   console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
+  //   if(jwt && params.deviceId){
+  //     console.log('params.deviceId')
+  //     getVendorAndMachineOrders(params.deviceId, limit, page)
+  //   }
+  //   if (jwt && !params.deviceId) {
+  //     fetchData(limit, page);
+  //   } 
+  // }, [limit, page, jwt]);
+
+  // const fetchData = (searchKey = "", searchTerm = "") => {
+  //   getDevices(limit, page, searchTerm, searchKey);
+  // };
 
   useEffect(() => {
     console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
-    if (jwt) {
-      fetchData(limit, page);
-    }
-  }, [limit, page, jwt]);
+    if (jwt && params.deviceId) {
+        console.log('params.deviceId');
+        getVendorAndMachineOrders(params.deviceId, limit, page);
+    } else if (jwt && (params.deviceId == null || !params.deviceId || params.deviceId == "") ) {
+        fetchData(limit, page);
+    } 
+}, [limit, page, jwt, params.deviceId]);
 
-  const fetchData = (searchKey = "", searchTerm = "") => {
-    getDevices(limit, page, searchTerm, searchKey);
-  };
+const fetchData = (searchKey = "", searchTerm = "") => {
+    getDevices(limit, page, searchTerm, searchKey)
+        .then(response => {
+            setResult(response.result.results);
+            setPageDetails(response.result.results.pageDetails);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error fetching data:', error);
+        });
+};
+
   const columns = [
     {
       name: "NAME",
