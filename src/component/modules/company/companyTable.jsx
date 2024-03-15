@@ -50,13 +50,13 @@ const CompanyTable = () => {
 
   const initialValues = {
     companyName: existingData?.companyName || "",
-    companyType: existingData?.companyType || "",
-    website: existingData?.website || "",
-    email: existingData?.email || "",
+    // companyType: existingData?.companyType || "",
+    // website: existingData?.website || "",
+    // email: existingData?.email || "",
     address: existingData?.address || "",
-    industry: existingData?.industry || "",
-    founded: existingData?.founded || "",
-    companyHead: existingData?.companyHead || "",
+    // industry: existingData?.industry || "",
+    // founded: existingData?.founded || "",
+    // companyHead: existingData?.companyHead || "",
   };
 
    
@@ -165,7 +165,7 @@ const CompanyTable = () => {
                 className="events-lists-table"
                 data={[...companyLisiting]}
                 columns={columns}
-                // striped={true}
+                striped={true}
                 pagination
                 paginationServer                
                 // fixedHeader
@@ -176,7 +176,7 @@ const CompanyTable = () => {
                 paginationTotalRows={pageDetails?.totalResults}
                 paginationPerPage={limit}
                 onChangeRowsPerPage={(perPage) => {
-                  {console.log("pageDetails?.totalResults",pageDetails?.totalResults)}
+                  {console.log("pageDetails?.totalResults _______",pageDetails?.totalResults)}
                   localStorage.setItem("limit", perPage);
                   // setLimit(parseInt(perPage, 10));                 
                 }}

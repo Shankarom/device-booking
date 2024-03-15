@@ -10,7 +10,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import ListItemText from '@mui/material/ListItemText';
 import { MdDeviceUnknown } from "react-icons/md";
 import InboxIcon from '@mui/icons-material/MoveToInbox'; 
@@ -82,12 +82,13 @@ export default function CommonSideBar() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
+    console.log("__________________",)
       // Proceed with logout
       // localStorage.removeItem(role);
       // localStorage.removeItem(userDetails);
       localStorage.removeItem("token");
       // navigating the user to the login page after logout
-      navigate("/dashboard");
+      navigate("/");
   };
 
   return (
@@ -105,7 +106,7 @@ export default function CommonSideBar() {
                         <AiOutlineClose size={24} />
                     </div> */}
                 </div>
-            </div>
+      </div>
       <Drawer variant="permanent" open={show}>
         <DrawerHeader>      
           <IconButton onClick={() => setShow(!show)}
@@ -118,6 +119,21 @@ export default function CommonSideBar() {
         <div className='flex items-center justify-center !bg-[rgba(107,114,128,.5)] mt-1.5 w-full max-w-[80%] h-[1px] ml-auto mr-auto'>
         </div>
         <List>
+        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/dashboard")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <DashboardIcon size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Dashboard" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/device")}>
             <ListItemButton
               sx={{
@@ -129,7 +145,7 @@ export default function CommonSideBar() {
             >
               <MdDeviceUnknown size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="device" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Device" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
@@ -144,7 +160,7 @@ export default function CommonSideBar() {
             >
               <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="manager" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Manager" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
@@ -159,7 +175,7 @@ export default function CommonSideBar() {
             >
               <LiaIndustrySolid size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="company" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Company" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
@@ -189,7 +205,7 @@ export default function CommonSideBar() {
             >
               <IoBookmark size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="booking" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Booking" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>

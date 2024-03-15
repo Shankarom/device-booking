@@ -14,6 +14,7 @@ export const ManagerProvider = ({children}) =>{
     const [updateManagerModal, setUpdateManagerModal] = useState(false);
     const [assignDeviceManagerModal, setAssignDeviceManagerModal] = useState(false);
     const [deleteManagerModal, setDeleteManagerModal] = useState(true)
+    const [pageDetails, setPageDetails] = useState([]);
 
     const navigate = useNavigate()
 
@@ -23,7 +24,7 @@ export const ManagerProvider = ({children}) =>{
           const getManagers = await ManagerService.getManager();
           if (getManagers.data.success) {
             setManagerList(getManagers.data.result.results);
-            // toast.success(getDevice.data.message);
+            setPageDetails(getManagers?.data?.result?.pageDetails)
           } else {
             setManagerList([]);
             toast.error(getManagers.data.message);
@@ -34,8 +35,7 @@ export const ManagerProvider = ({children}) =>{
         } finally {
           setLoading(false);
         }
-      }; 
-
+    }; 
     const addManagers = async (value) => {
         setLoading(true);
         try {
@@ -88,7 +88,6 @@ export const ManagerProvider = ({children}) =>{
         }
       }
     }
-
     const deleteManager = async (managerId) => {
       setDeleteManagerModal(true)
       setLoading(true)
@@ -117,6 +116,25 @@ export const ManagerProvider = ({children}) =>{
         }
       }
     }
+    const searchDevice = async(value) =>{
+      setLoading(true)
+      try {
+        let searchResult = await ManagerService.searchManager(value)
+        if (searchResult.data.success) {
+          setManagerList(searchResult.data.result.results);
+          setPageDetails(getManagers?.data?.result?.pageDetails)
+        } else {
+          setManagerList([]);
+          toast.error(searchResult.data.message);
+        }
+      } catch (error) {
+        console.log("Error fetching devices:", error);
+        toast.error("An error occurred while fetching devices");
+      } finally {
+        setLoading(false);
+      }
+
+    }
     return(
         <managerContext.Provider
         value={{
@@ -131,7 +149,8 @@ export const ManagerProvider = ({children}) =>{
             setShowAddManger,
             addManagers,
             getManagers,
-            setUpdateManagerModal
+            setUpdateManagerModal,
+            searchDevice
         }}
         >
             {children}
