@@ -48,6 +48,20 @@
       } 
   }, [limit, page, jwt, params.deviceId, ]);
 
+  // useEffect(() => {
+  //   console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
+  //   if(jwt && params.deviceId){
+  //     console.log('params.deviceId')
+  //     getVendorAndMachineOrders(params.deviceId, limit, page)
+  //   }
+  //   if (jwt && !params.deviceId) {
+  //     fetchData(limit, page);
+  //   } 
+  // }, [limit, page, jwt]);
+
+  // const fetchData = (searchKey = "", searchTerm = "") => {
+  //   getDevices(limit, page, searchTerm, searchKey);
+  // };
 
 
   const fetchData = () => {

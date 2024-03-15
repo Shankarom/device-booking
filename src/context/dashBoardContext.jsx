@@ -10,10 +10,6 @@ export const DashboardProvider = ({children}) =>{
     const [deviceCount, setDeviceCount] = useState([])
     const [bookinglist, setBookinglist] = useState([])
     const [deviceTypeCount, setDeviceTypeCount] = useState([])
-
-
-
-
     const getDashboardDevice = async () =>{
         setLoading(false)
         try{

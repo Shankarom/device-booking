@@ -1,33 +1,30 @@
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import {ManagerService} from '../component/apiServices/managerService'
+import {UserService} from '../component/apiServices/userService'
 
-const managerContext = createContext()
+const userContext = createContext()
 
-export const ManagerProvider = ({children}) =>{
+export const UserProvider = ({children}) =>{
 
     const [loading, setLoading] = useState(false)
-    const [managerList, setManagerList] = useState([])
-    const [showAddManager, setShowAddManger] = useState(false);
-    const [managerId, setManagerId] = useState('')
+    const [usersList, setUsersList] = useState([])
     const [updateManagerModal, setUpdateManagerModal] = useState(false);
-    const [assignDeviceManagerModal, setAssignDeviceManagerModal] = useState(false);
     const [deleteManagerModal, setDeleteManagerModal] = useState(true)
-    const [pageDetails, setPageDetails] = useState([]);
 
     const navigate = useNavigate()
 
-    const getManagers = async () => {
+    const getUsers = async () => {
         setLoading(true);
         try {
-          const getManagers = await ManagerService.getManager();
-          if (getManagers.data.success) {
-            setManagerList(getManagers.data.result.results);
-            setPageDetails(getManagers?.data?.result?.pageDetails)
+          const getUsers = await UserService.getUsers();
+          if (getUsers.data.success) {
+            setUsersList(getUsers.data.result.results);
+            // setPagination(getUsers?.data?.result?.)
+            // toast.success(getUsers.data.message);
           } else {
-            setManagerList([]);
-            toast.error(getManagers.data.message);
+            setUsersList([]);
+            toast.error(getUsers.data.message);
           }
         } catch (error) {
           console.log("Error fetching devices:", error);
@@ -35,32 +32,37 @@ export const ManagerProvider = ({children}) =>{
         } finally {
           setLoading(false);
         }
-    }; 
-    const addManagers = async (value) => {
-        setLoading(true);
+      };
+
+      const getCompanyUsers = async (
+        companyId,
+        limit,
+        page
+      ) => {
         try {
-            const data = { 
-              firstName: value.firstName,
-              lastName: value.lastName,
-              email: value.email,
-              deviceId:["65dc1e117275b74abc0a751b"]
-             };
-            const createDevice = await ManagerService.AddManager(data);
-            if (createDevice.data.success == true) {
-              setShowAddManger(false);
-              navigate("/manager");
-              getManagers(); // Assuming you want to fetch devices after adding a new one
-              toast.success(createDevice.data.message);
-            } else {
-                toast.error(createDevice.data.message);
-            }
+          // Assuming getOrderByDate returns a promise
+          const getCompanyAssociatedUsers =
+          await UserService.getCompanyAssociatedUsers({
+            companyId,
+            pageSize: limit,
+            page,
+          });
+          // console.log("🚀 ~ DeviceProvider ~ getCompanyAssociatedUsers:", getCompanyAssociatedUsers)
+          if (getCompanyAssociatedUsers.data.success == true) {
+            // setMachineOrders(getCompanyAssociatedUsers?.data?.result?.results);
+            setUsersList(getCompanyAssociatedUsers?.data?.result?.results);
+            // setPageDetails(getCompanyAssociatedUsers.data.pageDetails);
+          } else {
+            // setMachineOrders([]);
+            setUsersList([]);
+            // setPageDetails(null);
+          }
         } catch (error) {
-            console.log("Error adding device:", error);
-            toast.error("An error occurred while creating the device");
-        } finally {
-            setLoading(false);
+          // Handle errors
+          console.error("Error fetching orders between dates:", error);
         }
-    };
+      };
+   
     const updateManagers = async (updatedField, limit, page) =>{
       try{
 
@@ -88,6 +90,7 @@ export const ManagerProvider = ({children}) =>{
         }
       }
     }
+
     const deleteManager = async (managerId) => {
       setDeleteManagerModal(true)
       setLoading(true)
@@ -116,51 +119,27 @@ export const ManagerProvider = ({children}) =>{
         }
       }
     }
-    const searchDevice = async(value) =>{
-      setLoading(true)
-      try {
-        let searchResult = await ManagerService.searchManager(value)
-        if (searchResult.data.success) {
-          setManagerList(searchResult.data.result.results);
-          setPageDetails(getManagers?.data?.result?.pageDetails)
-        } else {
-          setManagerList([]);
-          toast.error(searchResult.data.message);
-        }
-      } catch (error) {
-        console.log("Error fetching devices:", error);
-        toast.error("An error occurred while fetching devices");
-      } finally {
-        setLoading(false);
-      }
-
-    }
     return(
-        <managerContext.Provider
+        <userContext.Provider
         value={{
-            managerList,
-            showAddManager,
-            managerId,
+            usersList,
             updateManagerModal,
-            setManagerId,
             updateManagers,
             setDeleteManagerModal,
             deleteManager,
-            setShowAddManger,
-            addManagers,
-            getManagers,
+            getUsers,
             setUpdateManagerModal,
-            searchDevice
+            getCompanyUsers
         }}
         >
             {children}
-        </managerContext.Provider>
+        </userContext.Provider>
     )
 }
-export const useManagerContext = () => {
-    const context = useContext(managerContext);
+export const useUserContext = () => {
+    const context = useContext(userContext);
     if (!context) {
-        throw new Error("useManagerContext must be used within a ManagerProvider");
+        throw new Error("useManagerContext must be used within a UserProvider");
     }
     return context;
 };

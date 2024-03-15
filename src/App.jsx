@@ -6,10 +6,13 @@ import AddDevice from './component/modules/Device/AddDevice';
 import Navbar from './component/modules/sidebar/superadminSidebar';
 import DeviceScreen from './pages/device/DevicePage';
 import ManagersScreen from '../src/pages/managers/managers';
+import UsersScreen from '../src/pages/users/user';
 import  CompanyScreen  from "./pages/company/company"
 import { Toaster } from 'react-hot-toast';
 import { DeviceProvider } from './context/deviceContext';
 import { ManagerProvider } from './context/managerContext';
+import { UserProvider } from './context/userContext';
+import { DashboardProvider } from './context/dashBoardContext';
 import {CompanyProvider} from './context/companyContext'
 import LicenseScreen from '../src/pages/license/LicensePage';
 import { LicenseProvider } from './context/licenseContext'
@@ -17,7 +20,6 @@ import AddLicense from './component/modules/license/AddLicense';
 import DashboardItem from './component/modules/dashBoard';
 import DashboardScreen from './pages/dashboard/adminDashboard'
 import { ToggleContextProvider } from './context/ToogleContext';
-import { DashboardProvider } from './context/dashBoardContext';
 import BookingScreen from './pages/bookings/booking';
 import { BookingProvider } from './context/bookingContext';
 
@@ -34,7 +36,10 @@ function App() {
          <LicenseProvider>
           <DashboardProvider>
             <BookingProvider>
-            <Routes>
+              <CompanyProvider>
+                  <DashboardProvider>
+                    <UserProvider>
+          <Routes>
             <Route path='*' element={<OnBoarding />} />
             <Route path='/addDevice' element={<AddDevice />} />
             <Route path='/addLicense' element={<AddLicense />} />
@@ -46,7 +51,14 @@ function App() {
             <Route path='/dashboard' element={<DashboardScreen/>} />
             <Route path='/booking' element = {<BookingScreen/>}/>
             <Route path="/device/:deviceId" element={<DeviceScreen />}/>
+            <Route path="/device/:deviceId" element={<DeviceScreen />}/>
+            <Route path='/user' element={<UsersScreen/>} />
+            <Route path="/user/:companyId" element={<UsersScreen />}/>
+
           </Routes>
+          </UserProvider>
+          </DashboardProvider>
+          </CompanyProvider>
           </BookingProvider>
           </DashboardProvider>
           </LicenseProvider>

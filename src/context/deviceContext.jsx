@@ -182,7 +182,6 @@ export const DeviceProvider = ({ children }) => {
                 deviceList,
                 showAddDevice,
                 updateDeviceModal,
-                pagination,
                 pageDetails,
                 searchResults,
                 setPageDetails,
