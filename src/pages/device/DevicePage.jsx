@@ -46,9 +46,12 @@ function DeviceScreen() {
   
     useEffect(() => {
       // Debounce search function with 300ms delay
-      const delayedSearch = debounce(searchDevice, 300);
-      // Call the delayed search function when search state changes
-      delayedSearch(search);
+      if(search.length > 0 ){
+        const delayedSearch = debounce(searchDevice, 300);
+        // Call the delayed search function when search state changes
+        delayedSearch(search);
+      }
+    
     }, [search]);
 
   return (

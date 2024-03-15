@@ -51,7 +51,6 @@ function App() {
             <Route path='/dashboard' element={<DashboardScreen/>} />
             <Route path='/booking' element = {<BookingScreen/>}/>
             <Route path="/device/:deviceId" element={<DeviceScreen />}/>
-            <Route path="/device/:deviceId" element={<DeviceScreen />}/>
             <Route path='/user' element={<UsersScreen/>} />
             <Route path="/user/:companyId" element={<UsersScreen />}/>
 
