@@ -72,7 +72,7 @@ const ManagersScreen = () =>{
         Search
       </button>
       </div> */}
-             <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px] mb-2">
+             <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
       {showAddManager && (
         <Modal title="Add company" descriptionText={<AddManager/>}closeIcon={handleCloseAddDevice} />
       )}
