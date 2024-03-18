@@ -22,7 +22,7 @@ import { LiaIndustrySolid } from 'react-icons/lia';
 import { IoBookmark } from 'react-icons/io5';
 import { Button } from '@mui/material';
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -212,16 +212,16 @@ export default function CommonSideBar() {
         </List>
         <Divider />
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut} className='mt-[420px]'>
             <ListItemButton
               sx={{
                 minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
+                justifyContent: show ? 'initial' : 'bottom',
+                px: 4.5,
               }}
               // disabled={!show}
             >
-              <IoBookmark size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              <IoBookmark size={25} className={`${show ? 'mt-0' : 'mr-0'}`} />
               {show && (
                 <ListItemText primary="Sign Out" sx={{ opacity: show ? 1 : 0 }} />
               )}

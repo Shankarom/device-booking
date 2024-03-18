@@ -20,7 +20,14 @@ export const DeviceProvider = ({ children }) => {
     const addDevice = async (value) => {
         setLoading(true);
         try {
-            const data = { name: value.name };
+            const data = { name: value.name,
+              deviceType: value.deviceType,
+              runningDuration: value.runningDuration,
+              price: value.price,
+              location: value.location,
+              description: value.description,
+              purpose: value.purpose
+            };
             const createDevice = await DeviceService.AddDevice(data);
             if (createDevice.data.success) {
                 setShowAddDevice(false);
