@@ -26,13 +26,27 @@ export const BookingProvider = ({children}) =>{
         toast.error("An error occurred while fetching devices");
       }
     }
+    const searchBooking = async (value) =>{
+        try{
+            const bookingDetails =  await BookingService.searchBooking(value)
+            if(bookingDetails.data.success == true){
+             setBookingList(bookingDetails.data.result.results);
+             setPageDetails(bookingDetails?.data?.result?.pageDetails)
+        }
+       }
+       catch (error) {
+        console.log("Error fetching devices:", error);
+        toast.error("An error occurred while fetching devices");
+      }
+    }
     return (
         <BookingContext.Provider
         value={{
             loading,
             bookingList,
             getBookingDetails,
-            setPageDetails
+            setPageDetails,
+            searchBooking
         }}
         >
             {children}

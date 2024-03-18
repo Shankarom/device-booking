@@ -101,11 +101,11 @@ export const DeviceProvider = ({ children }) => {
           },
         });
     }
-    const deleteDevice = async (userId) => {
+    const deleteDevice = async (deviceId) => {
         setDeleteDeviceModal(true);
         setLoading(true);
         try {
-          const isDelete = await DeviceService.deleteDevice(userId);
+          const isDelete = await DeviceService.deleteDevice(deviceId);
     
           if (isDelete.data.success === true) {
             setDeleteDeviceModal(false);
@@ -136,16 +136,12 @@ export const DeviceProvider = ({ children }) => {
       ) => {
         try {
           // Assuming getOrderByDate returns a promise
-          const getDeviceByManager =
-          await DeviceService.getDeviceByManager({
-            managerId,
-            pageSize: limit,
-            page,
-          });
-          // console.log("🚀  DeviceProvider  getVendorAndMachineOrder:", getVendorAndMachineOrder)
+          const getDeviceByManager = await DeviceService.getDeviceByManager({ managerId, pageSize: limit, page, });
+          console.log("🚀 ~ DeviceProvider ~ getDeviceByManager:", getDeviceByManager)
           if (getDeviceByManager.data.success == true) {
             // setMachineOrders(getVendorAndMachineOrder?.data?.result?.results);
             setDeviceList(getDeviceByManager?.data?.result?.results);
+            setManagerDevice(getDeviceByManager?.data?.result?.results)
           } else {
             // setMachineOrders([]);
             setDeviceList([]);
@@ -194,7 +190,7 @@ export const DeviceProvider = ({ children }) => {
                 deleteDevice,
                 getDeviceByMangers,
                 searchDevice,
-
+                
             }}
         >
             {children}

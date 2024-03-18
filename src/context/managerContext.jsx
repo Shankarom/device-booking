@@ -116,7 +116,7 @@ export const ManagerProvider = ({children}) =>{
         }
       }
     }
-    const searchDevice = async(value) =>{
+    const searchManager = async(value) =>{
       setLoading(true)
       try {
         let searchResult = await ManagerService.searchManager(value)
@@ -150,7 +150,7 @@ export const ManagerProvider = ({children}) =>{
             addManagers,
             getManagers,
             setUpdateManagerModal,
-            searchDevice
+            searchManager
         }}
         >
             {children}

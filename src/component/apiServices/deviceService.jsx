@@ -42,7 +42,6 @@ export const DeviceService = {
         try {
           const response = await httpService.get(`manager/devices/${managerId.managerId}`);
           resolve(response);
-          console.log("🚀  newPromise  response:", response)
         } catch (error) {
           reject(error);
         }

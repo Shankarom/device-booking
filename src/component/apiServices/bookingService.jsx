@@ -7,7 +7,15 @@ export const BookingService = {
         try{
             const response = await httpService.get(`booking/?limit=${limit}$page=${limit}`)
             resolve(response)
-            console.log("🚀 ~ newPromise ~ response:", response)
+        }catch(error){
+            reject(error)
+        }
+    }),
+    searchBooking: (value) =>
+    new Promise (async (resolve, reject) =>{
+        try{
+            const response = await httpService.get(`booking/?search=${value}`)
+            resolve(response)
         }catch(error){
             reject(error)
         }

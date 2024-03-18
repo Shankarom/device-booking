@@ -33,6 +33,7 @@ const AddDevice = () => {
                             
                           </div>
                           
+                          
                         </div>
                         <Button
                           label="Add Device"

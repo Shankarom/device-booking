@@ -46,7 +46,7 @@ function DeviceScreen() {
   
     useEffect(() => {
       // Debounce search function with 300ms delay
-      const delayedSearch = debounce(searchDevice, 300);
+      const delayedSearch = debounce(searchDevice, 100);
       // Call the delayed search function when search state changes
       delayedSearch(search);
     }, [search]);
@@ -55,37 +55,35 @@ function DeviceScreen() {
     <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
       <div>
       <CommonSideBar />
-      <div className="flex justify-between items-center mr-4">
-
-      <Button
-        label="Add Device"
-        className="bg-black mx-4 !w-[200px] mt-4 mb-4"
-        onClick={handleAddDeviceClick}
-      />
+      <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
       {showAddDevice && (
         <Modal title="Add device" descriptionText={<AddDevice/>}closeIcon={handleCloseAddDevice} />
       )}
+
         <div className="relative">
         <input
           type="text"
-          className="border rounded pl-10 pr-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+          className="border rounded-lg pl-10 py-2 focus:outline-none focus:ring focus:border-blue-300 ml-2"
           placeholder="Search..."
           value={search}
           onChange={handleChange}
         />
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
-          <FontAwesomeIcon icon={faSearch} className="text-gray-500" />
+          <FontAwesomeIcon icon={faSearch} className="text-gray-500 pl-2" />
         </div>
-        {/* <button
-        type="submit"
-        className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-      >
-        Search
-      </button> */}
       </div>
+      <p
+        className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
+          Devices
+      </p>
+      <Button
+        label="Add Device"
+        className="bg-black !w-[200px] mt-4 mb-4 mr-2"
+        onClick={handleAddDeviceClick}
+      />
       </div>
         
-      <DeviceTable search={search} />
+      <DeviceTable/>
       </div>
     </div>
   );

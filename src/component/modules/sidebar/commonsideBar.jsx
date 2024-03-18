@@ -20,7 +20,7 @@ import { useToggleContext } from '../../../context/ToogleContext';
 import { GrUserManager } from 'react-icons/gr';
 import { LiaIndustrySolid } from 'react-icons/lia';
 import { IoBookmark } from 'react-icons/io5';
-import { Button } from '@mui/material';
+import { FaSignOutAlt } from "react-icons/fa";
 
 const drawerWidth = 240;
 
@@ -116,7 +116,7 @@ export default function CommonSideBar() {
           </IconButton>
           
         </DrawerHeader>
-        <div className='flex items-center justify-center !bg-[rgba(107,114,128,.5)] mt-1.5 w-full max-w-[80%] h-[1px] ml-auto mr-auto'>
+        <div className='flex items-center justify-center !bg-[rgba(107,114,128,.5)] mt-1.5 w-full max-w-[0%] h-[1px] ml-auto mr-auto'>
         </div>
         <List>
         <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/dashboard")}>
@@ -131,66 +131,6 @@ export default function CommonSideBar() {
               <DashboardIcon size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
                 <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Dashboard" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/device")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <MdDeviceUnknown size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText primary="Device" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/manager")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Manager" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/company")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <LiaIndustrySolid size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText primary="Company" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/user")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText primary="user" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
@@ -209,10 +149,22 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/device")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <MdDeviceUnknown size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText primary="Device" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/company")}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -221,9 +173,57 @@ export default function CommonSideBar() {
               }}
               // disabled={!show}
             >
-              <IoBookmark size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              <LiaIndustrySolid size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="Sign Out" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Company" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/manager")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Manager" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/user")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText primary="user" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut} className='mt-[490px]'>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <FaSignOutAlt size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText  primary="Sign out"  sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>

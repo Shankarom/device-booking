@@ -16,7 +16,7 @@ const Button = ({
         setSearch(event.target.value);
     };
     return(
-        <div className="flex justify-between items-center space-x-2 pr-3">
+        <div className="flex justify-between items-center space-x-2">
          <button onClick={onClick} type={type} className={`text-white bg-black-700 hover:bg-black focus:ring-4 focus:outline-none
         focus:ring-black font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center ${className}`} 
         disabled={disabled}>{label}</button>

@@ -68,7 +68,7 @@ const UserTable = () => {
 
     const columns = [
         {
-            name: "NAME",
+            name: "Name",
             selector: (row, index) => (
                 <p className="text-xs 2xl:text-base">
                     {row?.firstName} {row?.lastName}
@@ -76,7 +76,7 @@ const UserTable = () => {
             ),
         },
         {
-            name: "EMAIL",
+            name: "Email",
             selector: (row, index) => (
                 <p className="text-xs 2xl:text-base">
                     {row?.email}
@@ -84,7 +84,7 @@ const UserTable = () => {
             ),
         },
         {
-            name: "COMPANY NAME",
+            name: "Company Name",
             selector: (row, index) => (
                 <p className="text-xs 2xl:text-base">
                     {row?.companyName}
@@ -92,7 +92,7 @@ const UserTable = () => {
             ),
         },
         {
-            name: "CREATED AT",
+            name: "Created at",
             selector: (row, index) => (
                 <p className="text-xs 2xl:text-base">
                     {moment(row?.createdAt).format('lll')}

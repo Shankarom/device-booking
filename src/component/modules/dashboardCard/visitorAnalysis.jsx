@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useDashboardContext } from '../../../context/dashBoardContext';
+
+
 
 const options = {
   chart: {
@@ -45,14 +47,20 @@ const options = {
 };
 
 const ChartThree = () => {
-  const {deviceTypeCount} = useDashboardContext()
-  console.log("🚀 ~ ChartThree ~ deviceTypeCount:", deviceTypeCount)
+  const {deviceTypeCount,getDashboardDevice} = useDashboardContext()
+  useEffect(() =>{
+    setState({
+      // series: [desktop, mobile, tablet, laptop],
+      series: [deviceTypeCount?.desktop, deviceTypeCount?.laptop, deviceTypeCount?.tablet, deviceTypeCount?.laptop],
+    })
+  },[deviceTypeCount])
   let {desktop, mobile, tablet, laptop} = deviceTypeCount
 
   const [state, setState] = useState({
     // series: [desktop, mobile, tablet, laptop],
-    series: [desktop, laptop, tablet, laptop],
+    series: [deviceTypeCount?.desktop, deviceTypeCount?.laptop, deviceTypeCount?.tablet, deviceTypeCount?.laptop],
   });
+
 
   const handleReset = () => {
     setState((prevState) => ({

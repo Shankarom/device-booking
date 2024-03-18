@@ -9,6 +9,7 @@ export const DashboardProvider = ({children}) =>{
     const [loading, setLoading] = useState(false)
     const [deviceCount, setDeviceCount] = useState([])
     const [bookinglist, setBookinglist] = useState([])
+    const [result , setResult] = useState([])
     const [deviceTypeCount, setDeviceTypeCount] = useState([])
     const getDashboardDevice = async () =>{
         setLoading(false)
@@ -16,6 +17,7 @@ export const DashboardProvider = ({children}) =>{
             const DashboardDevice = await DashboardService.DashboardDevice()
             console.log("🚀 ~ getDashboardDevice ~ DashboardDevice:", DashboardDevice)
             if(DashboardDevice.data.success === true){
+                setResult(DashboardDevice.data.result)
                 setDeviceCount(DashboardDevice.data.result.device)
                 setBookinglist(DashboardDevice.data.result.bookingDetails)
                 setDeviceTypeCount(DashboardDevice.data.result.deviceType)
@@ -36,6 +38,7 @@ export const DashboardProvider = ({children}) =>{
         value={{
             setDeviceCount,
             getDashboardDevice,
+            result,
             deviceCount,
             bookinglist,
             deviceTypeCount

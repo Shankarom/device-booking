@@ -17,10 +17,9 @@ import {CompanyProvider} from './context/companyContext'
 import LicenseScreen from '../src/pages/license/LicensePage';
 import { LicenseProvider } from './context/licenseContext'
 import AddLicense from './component/modules/license/AddLicense';
-import DashboardItem from './component/modules/dashBoard';
 import DashboardScreen from './pages/dashboard/adminDashboard'
 import { ToggleContextProvider } from './context/ToogleContext';
-import BookingScreen from './pages/bookings/booking';
+import BookingScreen from './pages/bookings/bookingPage';
 import { BookingProvider } from './context/bookingContext';
 
 
@@ -50,7 +49,6 @@ function App() {
             <Route path='/license' element={<LicenseScreen />} />
             <Route path='/dashboard' element={<DashboardScreen/>} />
             <Route path='/booking' element = {<BookingScreen/>}/>
-            <Route path="/device/:deviceId" element={<DeviceScreen />}/>
             <Route path="/device/:deviceId" element={<DeviceScreen />}/>
             <Route path='/user' element={<UsersScreen/>} />
             <Route path="/user/:companyId" element={<UsersScreen />}/>

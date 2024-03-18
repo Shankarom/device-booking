@@ -62,21 +62,12 @@ const {
 
  const fetchData = (searchKey = "", searchTerm = "") => {
   getBookingDetails(limit, page, searchTerm, searchKey)
-        .then(response => {
-            setResult(response.result.results);
-            setPageDetails(response.result.results);
-        })
-        .catch(error => {
-            // Handle error
-            console.error('Error fetching data:', error);
-        });
 };
   const columns = [
     {
       name: "Company",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
-          {console.log("____________________jjjjjjjj", row)}
       {row?.companyName ? row.companyName.charAt(0).toUpperCase() + row.companyName.slice(1).toLowerCase() : ''}
         </p>
       ),
@@ -85,7 +76,6 @@ const {
       name: "Device",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
-          {console.log("____________________jjjjjjjj", row)}
       {row?.deviceName ? row.deviceName.charAt(0).toUpperCase() + row.deviceName.slice(1).toLowerCase() : ''}
         </p>
       ),
@@ -172,7 +162,7 @@ const {
   ];
   return (
     <>
-      <div className="mx-2">
+    <div className="mx-2 ml-[-24px]">
         <div className="flex flex-col">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
