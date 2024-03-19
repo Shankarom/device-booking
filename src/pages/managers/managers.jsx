@@ -10,18 +10,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const ManagersScreen = () =>{
 
-  const {showAddManager, searchManager} = useManagerContext()
+  const {showAddManager, searchManager, setShowAddManger} = useManagerContext()
   const [search, setSearch] = useState("");
   const handleChange = (event) => {
       setSearch(event.target.value);
   };
 
   const handleAddDeviceClick = () => {
-    setShowAddDevice(true);
+    setShowAddManger(true);
   };
 
   const handleCloseAddDevice = () => {
-    setShowAddDevice(false);
+    setShowAddManger(false);
   };
   const {show} = useToggleContext()
   const debounce = (func, delay) => {
