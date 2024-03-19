@@ -53,29 +53,54 @@ const fetchData = () => {
 };
   const columns = [
     {
-      name: "NAME",
+      name: "Name",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
+        <p className="text-xs _2xl:text-base">
           {row?.name}
         </p>
       ),
     },
     {
-      name: "DEVICE TYPE",
+      name: "Location",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
+        <p className="text-xs _2xl:text-base">
+          {row?.location}
+        </p>
+      ),
+    },
+    {
+      name: "Device type",
+      selector: (row, index) => (
+        <p className="text-xs _2xl:text-base">
           {row?.deviceType}
         </p>
       ),
     },
     {
-      name: "LAST ACTIVE",
+      name: "Price",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
+        <p className="text-xs _2xl:text-base">
+         {row?.price}
+        </p>
+      ),
+    },
+    {
+      name:"Use Time",
+      selector: (row, index) => (
+        <p className="text-xs _2xl:text-base">
+          {row?.runningDuration}
+        </p>
+      ),
+    },
+    {
+      name: "Last active",
+      selector: (row, index) => (
+        <p className="text-xs _2xl:text-base">
           {moment(row?.updatedAt).format('lll')}
         </p>
       ),
     },
+
     {
       name: "Action",
       selector: (row) => (

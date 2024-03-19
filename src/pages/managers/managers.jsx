@@ -44,34 +44,6 @@ const ManagersScreen = () =>{
       <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
         <div>
         <CommonSideBar/>
-        {/* <div className="flex justify-between items-center mr-4">
-        <Button
-        label="Add manager"
-        className="bg-black mx-4 mt-4 mb-4 !w-[200px]"
-        onClick={handleAddDeviceClick}
-      />
-      {showAddManager && (
-        <Modal title="Add Mangers" descriptionText={<AddManager/>}closeIcon={handleCloseAddDevice} />
-      )}
-             <div className="relative">
-        </div>
-        <input
-          type="text"
-          className="border rounded pl-10 pr-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-          placeholder="Search..."
-          value={search}
-          onChange={handleChange}
-        />
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
-          <FontAwesomeIcon icon={faSearch} className="text-gray-500" />
-        </div>
-        <button
-        type="submit"
-        className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-      >
-        Search
-      </button>
-      </div> */}
              <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
       {showAddManager && (
         <Modal title="Add company" descriptionText={<AddManager/>}closeIcon={handleCloseAddDevice} />
