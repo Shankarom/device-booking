@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useDeviceContext } from "../../../context/deviceContext";
+import { useBookingContext} from "../../../context/bookingContext"
 import DataTable from 'react-data-table-component';
 import { FormControlLabel, FormGroup, Switch, Tooltip } from '@mui/material';
 import { Icon } from '@iconify/react';
 import Modal from '../../modal/modal';
 import { Field, Formik } from 'formik';
 import moment from 'moment';
+import { CircularProgress } from "@mui/material";
 import { updateVendorSchema } from '../../../formik/formikValidationSchema';
 import { useParams, useNavigate } from "react-router-dom";
 
 
-const DeviceTable = (props) => {
-  const [limit, setLimit] = useState(10);
-  const storedLimit = localStorage.getItem("limit");
+const BookingTable = () => {
+const [limit, setLimit] = useState(10);
+const storedLimit = localStorage.getItem("limit");
 
-  const [page, setPage] = useState(1);
-  const [result, setResult] = useState([])
-  const [existingData, setExistingData] = useState(null);
-  const params = useParams();
+const [page, setPage] = useState(1);
+const [result, setResult] = useState([])
+const [existingData, setExistingData] = useState(null);
+  
 
-  const {
+const params = useParams();
+
+
+
+const {
     loading,
     getDevices,
     deviceList,
@@ -31,99 +37,129 @@ const DeviceTable = (props) => {
     pagination,
     getDeviceByMangers,
     setPageDetails,
-    pageDetails,
+    pageDetails
   } = useDeviceContext()
+
+  let {getBookingDetails, bookingList} = useBookingContext()
 
   const initialValues = {
     name: existingData?.name || "",
+    // email: existingData?.email || "",
+    // phone: existingData?.phone || "",
   };
 
   const jwt = (localStorage.getItem("token"));
-  let deviceLisiting = deviceList && deviceList?.map((item) => item);
+  const BookingListing = bookingList && bookingList?.map((item) => item);
+
   useEffect(() => {
     if (jwt && params.deviceId) {
         getDeviceByMangers(params.deviceId, limit, page);
     } else if (jwt && (params.deviceId == null || !params.deviceId || params.deviceId == "") ) {
-      fetchData(limit, page);
+        fetchData(limit, page);
     } 
-}, [limit, page, jwt, params.deviceId, ]);
+}, [limit, page, jwt, params.deviceId]);
 
-const fetchData = () => {
-    getDevices(limit, page);
+
+ const fetchData = (searchKey = "", searchTerm = "") => {
+  getBookingDetails(limit, page, searchTerm, searchKey)
 };
   const columns = [
     {
-      name: "NAME",
+      name: "Company",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
-          {row?.name}
+        <p className="text-xs _2xl:text-base">
+      {row?.companyName ? row.companyName.charAt(0).toUpperCase() + row.companyName.slice(1).toLowerCase() : ''}
         </p>
       ),
     },
     {
-      name: "DEVICE TYPE",
+      name: "Device",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
-          {row?.deviceType}
+        <p className="text-xs _2xl:text-base">
+      {row?.deviceName ? row.deviceName.charAt(0).toUpperCase() + row.deviceName.slice(1).toLowerCase() : ''}
         </p>
       ),
     },
     {
-      name: "LAST ACTIVE",
+      name: "User",
       selector: (row, index) => (
-        <p className="text-xs 2xl:text-base">
-          {moment(row?.updatedAt).format('lll')}
+        <p className=" text-xs _2xl:text-base">
+      {row?.userFirstName ? row.userFirstName.charAt(0).toUpperCase() + row.userFirstName.slice(1).toLowerCase() : ''}
         </p>
       ),
     },
     {
-      name: "Action",
-      selector: (row) => (
-        <div className='flex justify-between items-center gap-4'>
-          <div
-            className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
-            onClick={() => {
-              setUpdateDeviceModal(true);
-              setExistingData(row);
-              setDeviceId(row?.id);
-            }}
-          >
-            <Tooltip
-              placement="left"
-              title={<span className="text-base">Edit Device</span>}
-            >
-              <Icon icon="mdi:pencil" fontSize={18} />
-            </Tooltip>
-          </div>
-          {/* Status */}
-          <div
-            className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
-            onClick={async() => {
-              await deleteDevice(row?.id);
-            }}
-          >
-            <Tooltip
-              placement="left"
-              title={<span className="text-base">Delete Device</span>}
-            >
-              <Icon icon="ic:outline-auto-delete" fontSize={18} />
-            </Tooltip>
-          </div>
-        </div>
+      name: "Email",
+      selector: (row, index) => (
+        <p className="text-xs _2xl:text-base">
+      {row?.userEmail}
+        </p>
       ),
     },
+    {
+      name: "Company plan",
+      selector: (row, index) => (
+      <p className="text-xs _2xl:text-base">
+      {row?.licenseName ? row.licenseName.charAt(0).toUpperCase() + row.licenseName.slice(1).toLowerCase() : ''}
+
+        </p>
+      ),
+    },
+    {
+      name: "Request time",
+      selector: (row, index) => (
+      <p className="text-xs _2xl:text-base">
+      {moment(row?.updatedAt).format('llll')}
+
+        </p>
+      ),
+    },
+    {
+      name: "Booking status",
+      selector: (row, index) => (
+        <p className="text-xs _2xl:text-base">
+       {row?.bookingStatus ? row.bookingStatus.charAt(0).toUpperCase() + row.bookingStatus.slice(1).toLowerCase() : ''}
+        </p>
+      ),
+    },
+    // {
+    //   name: "Action",
+    //   selector: (row) => (
+    //     <div className='flex justify-between items-center gap-4'>
+    //       <div
+    //         className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+    //         onClick={() => {
+    //           setUpdateDeviceModal(true);
+    //           setExistingData(row);
+    //           setDeviceId(row?.id);
+    //         }}
+    //       >
+    //         <Tooltip
+    //           placement="left"
+    //           title={<span className="text-base">Edit Device</span>}
+    //         >
+    //           <Icon icon="mdi:pencil" fontSize={18} />
+    //         </Tooltip>
+    //       </div>
+    //       {/* Status */}
+    //       <div
+    //         className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+    //         onClick={async() => {
+    //           await deleteDevice(row?.id);
+    //         }}
+    //       >
+    //         <Tooltip
+    //           placement="left"
+    //           title={<span className="text-base">Delete Device</span>}
+    //         >
+    //           <Icon icon="ic:outline-auto-delete" fontSize={18} />
+    //         </Tooltip>
+    //       </div>
+    //     </div>
+    //   ),
+    // },
 
   ];
-
-  const customStyles = {
-    head: {
-      style: {
-        color: "#45267e",
-        display: "flex",
-      },
-    },
-  };
-
   return (
     <>
     <div className="mx-2 ml-[-24px]">
@@ -134,20 +170,40 @@ const fetchData = () => {
                 <div className="admin-lists orderListing">
                   <DataTable
                     className="events-lists-table"
-                    data={deviceLisiting}
+                    data={BookingListing}
                     columns={columns}
                     striped={true}
                     pagination
                     paginationServer
+                    // fixedHeader
+                    // highlightOnHover
+                    // responsive
                     noDataComponent={<h4>No Device found</h4>}
                     paginationRowsPerPageOptions={[10, 20, 30, 40, 50]}
                     paginationTotalRows={pageDetails?.totalResults}
                     paginationPerPage={limit}
                     onChangeRowsPerPage={(perPage) => {
                       localStorage.setItem("limit", perPage);
+                      // setLimit(parseInt(perPage, 10));                 
                     }}
+                    // onChangePage={(page) => {
+                    //   setPage(page);
+                    // }}
+
                     progressPending={loading}
-                    customStyles={customStyles}
+                    progressComponent={
+                      <CircularProgress
+                        size={42}
+                        style={{
+                          color: "#45267e",
+                          display: "flex",
+                          justifyContent: "center",
+                          height: "90vh",
+                          alignItems: "center",
+                        }}
+                      />
+                    }
+                  // customStyles={customStyles}
                   />
                 </div>
               </div>
@@ -212,6 +268,7 @@ const fetchData = () => {
                         onChange={(e) => {
                           const inputValue = e.target.value;
                           if (/^\s/.test(inputValue)) {
+                            // e.preventDefault();
                             return;
                           }
                           if (/^[a-zA-Z\s]*$/.test(inputValue)) {
@@ -223,6 +280,38 @@ const fetchData = () => {
                         <p className="text-red-500">{formik?.errors?.name}</p>
                       ) : null}
                     </div>
+                    {/* <div className="email form-group flex items-start flex-col gap-2">
+                      <label
+                        className="!text-[#333] !text-base !font-normal"
+                        htmlFor="email"
+                      >
+                        Email<span className="text-[#d50000]">*</span>
+                      </label>
+                      <Field
+                        name="email"
+                        className="border border-[#DCDCDC] rounded-[4px] !shadow-none !filter-none !text-base"
+                        type="email"
+                      />
+                      {formik?.errors?.email && formik?.touched?.email ? (
+                        <p className="text-red-500">{formik?.errors?.email}</p>
+                      ) : null}
+                    </div> */}
+                    {/* <div className="email form-group flex items-start flex-col gap-2">
+                      <label
+                        className="!text-[#333] !text-base !font-normal"
+                        htmlFor="phone"
+                      >
+                        Phone<span className="text-[#d50000]">*</span>
+                      </label>
+                      <Field
+                        name="phone"
+                        type="text"
+                        className="border border-[#DCDCDC] rounded-[4px] !shadow-none !filter-none !text-base"
+                      />
+                      {formik?.errors?.phone && formik?.touched?.phone ? (
+                        <p className="text-red-500">{formik?.errors?.phone}</p>
+                      ) : null}
+                    </div> */}
                     <div className="flex items-center flex-col lg:flex-row gap-[10px] mt-4">
                       <button
                         type="button"
@@ -249,4 +338,4 @@ const fetchData = () => {
   );
 };
 
-export default DeviceTable;
+export default BookingTable;

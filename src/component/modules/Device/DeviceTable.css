@@ -223,7 +223,10 @@
     margin-left: 18px;
     font-size: 15px;
   }
-  
+  .rdt_TableHead{
+    color: #000000;
+    font-weight: bold;
+  }
   .table > :not(caption) > * > * {
     box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
     padding: 0.5rem;

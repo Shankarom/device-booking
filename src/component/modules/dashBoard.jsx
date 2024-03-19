@@ -1,45 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from "react";
 import ThreeDRotation from "@mui/icons-material/ThreeDRotation";
 import { Input, Card, Typography } from "@mui/material";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Cards from "../modules/dashboardCard/card";
 import TabletIcon from "@mui/icons-material/Tablet";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useToggleContext } from "../../context/ToogleContext";
 import ChartTwo from "./dashboardCard/profitChart";
 import ChartThree from "./dashboardCard/visitorAnalysis";
-import TableOne from "./dashboardCard/profitDevice";
-import { useDashboardContext } from "../../context/dashboardContext";
-
+import TableOne from "./dashboardCard/bookingDeatil";
+import {useDashboardContext} from  "../../context/dashBoardContext" 
+import ProfileDetail from "./dashboardCard/profileDetail";
 
 const DashboardItem = () => {
-  const {
-    dashboardData,
-    getDashboardData
-  } = useDashboardContext()
-    console.log("🚀 ~ DashboardItem ~ dashboardData:", dashboardData.device.totalDevices)
-  // const data = dashboardData && dashboardData?.map((item) => item);
-  // console.log("🚀 ~ dashboardData:", data)
-  const jwt = (localStorage.getItem("token"));
-  useEffect(() => {
-    // console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
-    if (jwt) {
-      fetchData();
-    }
-}, []);
-const fetchData = () => {
-  getDashboardData();
-};  
+  let  {result, getDashboardDevice, deviceCount} = useDashboardContext()
+  console.log(result,"🚀 ~ DashboardItem ~ deviceCount:", deviceCount)
+  useEffect(() =>{
+    getDashboardDevice()
+  },[])
+
   const cardData = [
-    {
-      title: "Total Devices",value: dashboardData.device.totalDevices, trend: -3, icon: CheckCircleIcon },
-    { title: "Available Devices", value: "120", trend: -3, icon: CheckCircleIcon },
-    { title: "Booked Devices", value: "130", trend: 10, icon: CalendarTodayIcon },
-    { title: "Mobile Devices", value: "350", trend: 10, icon: TabletIcon },
+    { title: "Total Devices", value: deviceCount.totalDevices, trend: 5, icon: ThreeDRotation },
+    { title: "Active Devices", value: deviceCount.activeDevices, trend: -3, icon: CheckCircleIcon },
+    { title: "Total Pending Request", value: result.totalPendingRequest, trend: 10, icon: CalendarTodayIcon },
+    { title: "Total Booking", value: result.totalBookings, trend: 10, icon: TabletIcon },
    
   ];
 
@@ -73,7 +57,7 @@ const fetchData = () => {
             {/* Recent Bookings Content */}
       </Card>
         
-        <div className="grid gap-4 md:col-start-2 md:col-span-2">
+        {/* <div className="grid gap-4 md:col-start-2 md:col-span-2">
           <Card>
             <div className="grid w-full gap-4 p-4 md:grid-cols-2">
               <div className="flex flex-col gap-1">
@@ -189,13 +173,20 @@ const fetchData = () => {
             </div>
           </Card>
 
-        </div>
+        </div> */}
+          <div className="col-span-2">
+    <Card className="p-3">
+      <Typography variant="body2">
+        <TableOne />
+      </Typography>
+    </Card>
+  </div>
       </div>
       <div className="grid gap-4 md:grid-cols-3">
   <div className="col-span-2">
     <Card className="p-3">
       <Typography variant="body2">
-        <TableOne />
+        <ProfileDetail  />
       </Typography>
     </Card>
   </div>

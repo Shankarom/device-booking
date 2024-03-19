@@ -10,10 +10,10 @@ export const DeviceProvider = ({ children }) => {
     const [showAddDevice, setShowAddDevice] = useState(false);
     const [updateDeviceModal, setUpdateDeviceModal] = useState(false);
     const [deleteDeviceModal, setDeleteDeviceModal] = useState(false);
-    const [pagination, setPagination] = useState([])
-
+    const [pageDetails, setPageDetails] = useState([]);
     const [deviceList, setDeviceList] = useState([]);
     const [deviceId, setDeviceId] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
     const navigate = useNavigate();
 
@@ -37,15 +37,13 @@ export const DeviceProvider = ({ children }) => {
             setLoading(false);
         }
     };
-
     const getDevices = async () => {
       setLoading(true);
       try {
         const getDevice = await DeviceService.getDevice();
-        console.log("🚀 ~ getDevices ~ getDevice:", getDevice?.data?.result?.pageDetails)
         if (getDevice.data.success) {
           setDeviceList(getDevice.data.result.results);
-          // setPagination(getDevice?.data?.result?.)
+          setPageDetails(getDevice?.data?.result?.pageDetails)
           // toast.success(getDevice.data.message);
         } else {
           setDeviceList([]);
@@ -58,8 +56,6 @@ export const DeviceProvider = ({ children }) => {
         setLoading(false);
       }
     };
-    
-
     const updateDeviceDetails = async (updatedFields, limit, page) => {
       try{
         setLoading(true);
@@ -105,12 +101,11 @@ export const DeviceProvider = ({ children }) => {
           },
         });
     }
-
-    const deleteDevice = async (userId) => {
+    const deleteDevice = async (deviceId) => {
         setDeleteDeviceModal(true);
         setLoading(true);
         try {
-          const isDelete = await DeviceService.deleteDevice(userId);
+          const isDelete = await DeviceService.deleteDevice(deviceId);
     
           if (isDelete.data.success === true) {
             setDeleteDeviceModal(false);
@@ -134,6 +129,47 @@ export const DeviceProvider = ({ children }) => {
           }
         }
       };
+    const getDeviceByMangers = async (
+        managerId,
+        limit,
+        page
+      ) => {
+        try {
+          // Assuming getOrderByDate returns a promise
+          const getDeviceByManager = await DeviceService.getDeviceByManager({ managerId, pageSize: limit, page, });
+          console.log("🚀 ~ DeviceProvider ~ getDeviceByManager:", getDeviceByManager)
+          if (getDeviceByManager.data.success == true) {
+            // setMachineOrders(getVendorAndMachineOrder?.data?.result?.results);
+            setDeviceList(getDeviceByManager?.data?.result?.results);
+            setManagerDevice(getDeviceByManager?.data?.result?.results)
+          } else {
+            // setMachineOrders([]);
+            setDeviceList([]);
+          }
+        } catch (error) {
+          // Handle errors
+          console.error("Error fetching orders between dates:", error);
+        }
+      };
+    const searchDevice = async(value) =>{
+      try{
+        const deviceData = await DeviceService.deviceSearching(value)
+        if(deviceData.data.success == true){
+          setDeviceList(deviceData.data.result.results)
+          setPageDetails(deviceData?.data?.result?.pageDetails)
+
+        }
+        else{
+          setSearchResults([])
+        }
+      }catch (error) {
+        console.log("Error fetching devices:", error);
+        toast.error("An error occurred while fetching devices");
+      }
+    }
+
+  
+  
 
     return (
         <DeviceContext.Provider
@@ -142,14 +178,19 @@ export const DeviceProvider = ({ children }) => {
                 deviceList,
                 showAddDevice,
                 updateDeviceModal,
-                pagination,
+                pageDetails,
+                searchResults,
+                setPageDetails,
                 setDeviceId,
                 addDevice,
                 setShowAddDevice,
                 getDevices,
                 updateDeviceDetails,
                 setUpdateDeviceModal,
-                deleteDevice
+                deleteDevice,
+                getDeviceByMangers,
+                searchDevice,
+                
             }}
         >
             {children}

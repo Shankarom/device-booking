@@ -9,12 +9,14 @@ import Select from "react-select";
 
 const AddManager = () => {
   const { addManagers } = useManagerContext();
+
   return (
     <div className="">
       <Formik
         initialValues={addManagerInitialValues}
         validationSchema={addManagerSchema}
         onSubmit={(values) => {
+          console.log(values)
           addManagers(values);
         }}
       >
@@ -78,13 +80,12 @@ const AddManager = () => {
                 <Select
                         className="!w-full text-left"
                         placeholder="Select Machine"
-                        options={availableMachinesOptions}
+                        // options={availableMachinesOptions}
                         name="allotMachine"
                         value={formik?.values?.allotMachine}
                         onChange={(selectedOption) => {
                           formik.setFieldValue("allotMachine", selectedOption);
                         }}
-                        styles={customStylesSelect}
                       
                 />
                 {formik.errors.email && formik.touched.email ? (

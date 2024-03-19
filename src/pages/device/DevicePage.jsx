@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeviceTable from "../../component/modules/Device/DeviceTable";
 import SideBar from "../../component/modules/sidebar/superadminSidebar";
 import Button from "../../component/button";
@@ -7,10 +7,20 @@ import Modal from "../../component/modal/modal";
 import { useDeviceContext } from "../../context/deviceContext";
 import CommonSideBar from "../../component/modules/sidebar/commonsideBar";
 import { useToggleContext } from "../../context/ToogleContext";
+import { useParams, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function DeviceScreen() {
-  const {showAddDevice, setShowAddDevice} = useDeviceContext()
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
+  const params = useParams();
+  const {showAddDevice, setShowAddDevice,searchDevice } = useDeviceContext()
+  const [search, setSearch] = useState("");
 
+  const handleChange = (event) => {
+      setSearch(event.target.value);
+  };
 
   const handleAddDeviceClick = () => {
     setShowAddDevice(true);
@@ -21,19 +31,62 @@ function DeviceScreen() {
   };
   const {show} = useToggleContext()
 
+    // Debounce function
+    const debounce = (func, delay) => {
+      let timeoutId;
+      return function (...args) {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    };
+  
+    useEffect(() => {
+      // Debounce search function with 300ms delay
+      if(search.length > 0 ){
+        const delayedSearch = debounce(searchDevice, 300);
+        // Call the delayed search function when search state changes
+        delayedSearch(search);
+      }
+    
+    }, [search]);
+
   return (
     <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
       <div>
       <CommonSideBar />
-      <Button
-        label="Add Device"
-        className="bg-black mx-4 !w-[200px] mt-4 mb-4"
-        onClick={handleAddDeviceClick}
-      />
+      <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
       {showAddDevice && (
         <Modal title="Add device" descriptionText={<AddDevice/>}closeIcon={handleCloseAddDevice} />
       )}
-      <DeviceTable />
+
+        <div className="relative">
+        <input
+          type="text"
+          className="border rounded-lg pl-10 py-2 focus:outline-none focus:ring focus:border-blue-300 ml-2"
+          placeholder="Search..."
+          value={search}
+          onChange={handleChange}
+        />
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
+          <FontAwesomeIcon icon={faSearch} className="text-gray-500 pl-2" />
+        </div>
+      </div>
+      <p
+        className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
+          Devices
+      </p>
+      <Button
+        label="Add Device"
+        className="bg-black !w-[200px] mt-4 mb-4 mr-2"
+        onClick={handleAddDeviceClick}
+      />
+      </div>
+        
+      <DeviceTable/>
       </div>
     </div>
   );

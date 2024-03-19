@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react';
 import Modal from '../../modal/modal';
 import { Field, Formik,Form } from 'formik';
 import { updateCompanySchema } from '../../../formik/formikValidationSchema';
+import { Link } from "react-router-dom";
 import { customStyles } from '../../../utils/utils';
 
 
@@ -29,7 +30,6 @@ const CompanyTable = () => {
     pageDetails,
   } = useCompanyContext()
 
-  console.log("pageDetails?.totalResults",pageDetails)
 
     // getting the jwt token from the localstorage:
     const jwt = (localStorage.getItem("token"));
@@ -49,13 +49,13 @@ const CompanyTable = () => {
 
   const initialValues = {
     companyName: existingData?.companyName || "",
-    companyType: existingData?.companyType || "",
-    website: existingData?.website || "",
-    email: existingData?.email || "",
+    // companyType: existingData?.companyType || "",
+    // website: existingData?.website || "",
+    // email: existingData?.email || "",
     address: existingData?.address || "",
-    industry: existingData?.industry || "",
-    founded: existingData?.founded || "",
-    companyHead: existingData?.companyHead || "",
+    // industry: existingData?.industry || "",
+    // founded: existingData?.founded || "",
+    // companyHead: existingData?.companyHead || "",
   };
 
    
@@ -80,14 +80,6 @@ const CompanyTable = () => {
         ),
       },
       {
-        name: "COMPANY TYPE",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.companyType}
-          </p>
-        ),
-      },
-      {
         name: "EMAIL",
         selector: (row, index) => (
           <p className="text-xs 2xl:text-base">
@@ -104,20 +96,25 @@ const CompanyTable = () => {
         ),
       },
       {
-        name:"INDUSTRY",
-        selector:(row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.industry}
-            </p>
-        )
-      },
-      {
-        name:"COMPANY HEAD",
-        selector: (row, index) =>(
-            <p className='text-as 2xl:text-base'>
-                {row?.companyHead}
-            </p>
-        )
+        name: "VIEW USERS",
+        selector: (row, index) => (
+          <Link
+            to={`/user/${row?.id}`}
+            className="bg-[#4992FF] text-white hover:bg-[#4992FF] transition-all duration-300 ease-in-out flex justify-center items-center text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+          >
+            <Tooltip
+              placement="bottom"
+              title={
+                <span className="text-base">
+                  Click here to see 's all users for this company(
+                  {row?.companyName})
+                </span>
+              }
+            >
+              <Icon icon="mdi:eye" fontSize={18} />
+            </Tooltip>
+          </Link>
+        ),
       },
       {
         name:"ACTIONS",
@@ -157,7 +154,7 @@ const CompanyTable = () => {
     ];
   return (
     <>
-    <div className="mx-2">
+    <div className="mx-2 ml-[-24px]">
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="p-1.5 w-full inline-block align-middle">
@@ -167,7 +164,7 @@ const CompanyTable = () => {
                 className="events-lists-table"
                 data={[...companyLisiting]}
                 columns={columns}
-                // striped={true}
+                striped={true}
                 pagination
                 paginationServer                
                 // fixedHeader
@@ -178,7 +175,7 @@ const CompanyTable = () => {
                 paginationTotalRows={pageDetails?.totalResults}
                 paginationPerPage={limit}
                 onChangeRowsPerPage={(perPage) => {
-                  {console.log("pageDetails?.totalResults",pageDetails?.totalResults)}
+                  {console.log("pageDetails?.totalResults _______",pageDetails?.totalResults)}
                   localStorage.setItem("limit", perPage);
                   // setLimit(parseInt(perPage, 10));                 
                 }}

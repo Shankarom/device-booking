@@ -10,7 +10,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import ListItemText from '@mui/material/ListItemText';
 import { MdDeviceUnknown } from "react-icons/md";
 import InboxIcon from '@mui/icons-material/MoveToInbox'; 
@@ -20,7 +20,7 @@ import { useToggleContext } from '../../../context/ToogleContext';
 import { GrUserManager } from 'react-icons/gr';
 import { LiaIndustrySolid } from 'react-icons/lia';
 import { IoBookmark } from 'react-icons/io5';
-import { Button } from '@mui/material';
+import { FaSignOutAlt } from "react-icons/fa";
 
 const drawerWidth = 240;
 
@@ -82,9 +82,13 @@ export default function CommonSideBar() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Perform sign-out logic here, such as clearing tokens, etc.
-    // After sign out, you can redirect the user to the login page or perform any other necessary action.
-    console.log("Sign out logic goes here...");
+    console.log("__________________",)
+      // Proceed with logout
+      // localStorage.removeItem(role);
+      // localStorage.removeItem(userDetails);
+      localStorage.removeItem("token");
+      // navigating the user to the login page after logout
+      navigate("/");
   };
 
   return (
@@ -102,7 +106,7 @@ export default function CommonSideBar() {
                         <AiOutlineClose size={24} />
                     </div> */}
                 </div>
-            </div>
+      </div>
       <Drawer variant="permanent" open={show}>
         <DrawerHeader>      
           <IconButton onClick={() => setShow(!show)}
@@ -112,25 +116,10 @@ export default function CommonSideBar() {
           </IconButton>
           
         </DrawerHeader>
-        <div className='flex items-center justify-center !bg-[rgba(107,114,128,.5)] mt-1.5 w-full max-w-[80%] h-[1px] ml-auto mr-auto'>
+        <div className='flex items-center justify-center !bg-[rgba(107,114,128,.5)] mt-1.5 w-full max-w-[0%] h-[1px] ml-auto mr-auto'>
         </div>
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/device")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <MdDeviceUnknown size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText primary="device" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/manager")}>
+        <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/dashboard")}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -139,24 +128,9 @@ export default function CommonSideBar() {
               }}
               // disabled={!show}
             >
-              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              <DashboardIcon size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="manager" sx={{ opacity: show ? 1 : 0 }} />
-              )}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/company")}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // disabled={!show}
-            >
-              <LiaIndustrySolid size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
-              {show && (
-                <ListItemText primary="company" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Dashboard" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
@@ -171,14 +145,26 @@ export default function CommonSideBar() {
             >
               <IoBookmark size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="booking" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Booking" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/device")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <MdDeviceUnknown size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText primary="Device" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/company")}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -187,9 +173,57 @@ export default function CommonSideBar() {
               }}
               // disabled={!show}
             >
-              <IoBookmark size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              <LiaIndustrySolid size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="Sign Out" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="Company" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/manager")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText className={`${show ? 'block' : 'hidden'}`} primary="Manager" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/user")}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText primary="user" sx={{ opacity: show ? 1 : 0 }} />
+              )}
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut} className='mt-[490px]'>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: show ? 'initial' : 'center',
+                px: 2.5,
+              }}
+              // disabled={!show}
+            >
+              <FaSignOutAlt size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              {show && (
+                <ListItemText  primary="Sign out"  sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>

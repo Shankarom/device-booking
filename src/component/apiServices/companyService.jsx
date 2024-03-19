@@ -37,5 +37,15 @@ export const CompanyService = {
         catch(error){
             reject(error)
         }
-    })
+    }),
+    companySearching:(value) =>
+    new Promise(async (resolve, reject) =>{
+      try{
+        const response = await httpService.get(`company/?search=${value}`);
+        console.log("🚀 ~ newPromise ~ response:", response)
+        resolve(response)
+    }catch (error) {
+        reject(error);
+      }
+    }) 
     }

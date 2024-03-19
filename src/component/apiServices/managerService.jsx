@@ -40,6 +40,15 @@ export const ManagerService = {
           }catch (error) {
           reject(error);
         }
-        })
+      }),
+      searchManager:(value) =>
+      new Promise (async (resolve, reject) =>{
+        try{
+          const response = await httpService.get(`manager/?search=${value}`)
+          resolve(response);
+        } catch (error) {
+          reject(error);
+        }
+      })
       
     }

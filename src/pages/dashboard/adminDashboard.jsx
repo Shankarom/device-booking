@@ -29,12 +29,10 @@ import DashboardItem from "../../component/modules/dashBoard";
 import CommonSideBar from "../../component/modules/sidebar/commonsideBar";
 import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { useToggleContext } from "../../context/ToogleContext";
-// import { useDashboardContext } from "../../context/dashboardContext";
 
 export default function DashboardScreen(){
     const { show } = useToggleContext();
     const [nav, setNav] = useState(false); // State to manage sidebar visibility
-
 
     return(
         <>

@@ -129,6 +129,24 @@ export const CompanyProvider = ({children}) =>{
           }
         }
       }
+    const searchCompany = async (value) => {
+      try{
+        const companyData = await CompanyService.companySearching(value)
+        if(companyData.data.success == true){
+          setCompanyList(companyData.data.result.results)
+          setPageDetails(companyData?.data?.result?.pageDetails)
+        }
+        else{
+          setCompanyList([])
+          setPageDetails([])
+        }
+
+
+      }catch (error) {
+        console.log("Error fetching devices:", error);
+        toast.error("An error occurred while fetching devices");
+      }
+    }
     return(
         <companyContext.Provider
         value={{
@@ -145,6 +163,7 @@ export const CompanyProvider = ({children}) =>{
             addCompany,
             updateCompany,
             setShowAddCompany,
+            searchCompany
             
         }}
         >

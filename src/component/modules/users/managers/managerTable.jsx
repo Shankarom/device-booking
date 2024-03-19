@@ -30,8 +30,6 @@ const ManagerTable = () => {
     // const user = JSON.parse(localStorage.getItem("role"));
     // all admins list mapping through api :
     const managerLisiting = managerList && managerList?.map((item) => item);
-    console.log("🚀 ~ ManagerTable ~ managerLisiting:", managerLisiting)
-
 
     useEffect(() => {
       console.log("useEffect called with limit:", limit, "page:", page, "jwt:", jwt);
@@ -39,7 +37,6 @@ const ManagerTable = () => {
         getManagers();
       }
   }, [limit, page, jwt]);
-
   const initialValues = {
     firstName: existingData?.firstName || "",
     lastName: existingData?.lastName || "",
@@ -47,9 +44,9 @@ const ManagerTable = () => {
     // password : " "
   };
 
-  const renderDevices = (devices) => {
-    return devices.map((device) => device.name).join(', ');
-  };
+  // const renderDevices = (devices) => {
+  //   return devices.map((device) => device.name).join(', ');
+  // };
     // const fetchData = (searchKey = "", searchTerm = "") => {
     //   getManagers(limit, page, searchTerm, searchKey);
     // };  
@@ -78,32 +75,32 @@ const ManagerTable = () => {
           </p>
         ),
       },
+      // {
+      //   name: "DEVICES",
+      //   selector: (row, index) => (
+      //     <p className="text-xs 2xl:text-base">
+      //       {renderDevices(row?.deviceId)}
+      //     </p>
+      //   ),
+      // }, 
       {
-        name: "DEVICES",
-        selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {renderDevices(row?.deviceId)}
-          </p>
-        ),
-      }, 
-      {
-        name: "View Devices",
+        name: "VIEW DEVICES",
         selector: (row, index) => (
           <Link
-            to={`/${row?.id}/device`}
-            // onClick={() => {
-            //   localStorage.setItem(machineLocation, row?.location);
-            //   localStorage.setItem(imeiMachine, JSON.stringify(row?.machineImei));
-            //   // localStorage.removeItem("vendor_name");
-            // }}
+            to={`/device/${row?.id}`}
+            onClick={() => {
+              // localStorage.setItem(machineLocation, row?.location);
+              // localStorage.setItem(imeiMachine, JSON.stringify(row?.id));
+              // localStorage.removeItem("vendor_name");
+            }}
             className="bg-[#4992FF] text-white hover:bg-[#4992FF] transition-all duration-300 ease-in-out flex justify-center items-center text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
           >
             <Tooltip
               placement="bottom"
               title={
                 <span className="text-base">
-                  Click here to see 's all orders for this machine(
-                  {/* {row?.machineImei}) */}
+                  Click here to see 's all devices for this manager(
+                  {row?.firstName} {row?.lastName})
                 </span>
               }
             >
@@ -120,8 +117,21 @@ const ManagerTable = () => {
             className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
             onClick={() => {
               setUpdateManagerModal(true);
-              
-              console.log("_______________________setExistingData(row)", setExistingData(row))
+              setExistingData(row);
+              setManagerId(row?.id);
+            }}
+          >
+            <Tooltip
+              placement="left"
+              title={<span className="text-base">Assign device</span>}
+            >
+              <Icon icon="tabler:device-ipad-plus" fontSize={18} />
+            </Tooltip>
+          </div>
+            <div
+            className="bg-[#8E5EF9] text-white hover:bg-[#8E5EF9] transition-all duration-300 ease-in-out flex justify-center items-center cursor-pointer text-base uppercase rounded-md p-[7px] 2xl:p-[10px]"
+            onClick={() => {
+              setUpdateManagerModal(true);
               setExistingData(row);
               setManagerId(row?.id);
             }}
@@ -141,7 +151,7 @@ const ManagerTable = () => {
           >
             <Tooltip
               placement="left"
-              title={<span className="text-base">Edit manager</span>}
+              title={<span className="text-base">delete manager</span>}
             >
               <Icon icon="ic:outline-auto-delete" fontSize={18} />
             </Tooltip>
@@ -152,7 +162,7 @@ const ManagerTable = () => {
     ];
   return (
     <>
-    <div className="mx-2">
+    <div className="mx-2 ml-[-24px]">
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="p-1.5 w-full inline-block align-middle">
