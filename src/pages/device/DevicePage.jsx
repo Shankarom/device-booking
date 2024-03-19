@@ -58,7 +58,7 @@ function DeviceScreen() {
     <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
       <div>
       <CommonSideBar />
-      <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
+      <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-34px] rounded-lg mt-[1px]">
       {showAddDevice && (
         <Modal title="Add device" descriptionText={<AddDevice/>}closeIcon={handleCloseAddDevice} />
       )}

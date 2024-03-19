@@ -151,7 +151,7 @@ const fetchData = () => {
 
   return (
     <>
-    <div className="mx-2 ml-[-24px]">
+    <div className="mx-2 ml-[-42px]">
         <div className="flex flex-col">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
