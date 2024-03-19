@@ -1,8 +1,12 @@
 import * as Yup from 'yup';
 import { PHONE_REGEX } from '../utils/utils';
 
-export const addDeviceSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required')
+export const addDeviceSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    deviceType: Yup.string().required('Type is required'),
+    runningDuration: Yup.string().required('Duration is required'),
+    price: Yup.string().required('Price is required'),
+    location: Yup.string().required('Location is required')
 })
 export const updateVendorSchema = Yup.object({
     name: Yup.string().required("Name is required"),
