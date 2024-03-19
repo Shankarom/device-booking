@@ -1,5 +1,11 @@
 export const addDeviceInitialValues = {
-    name:''
+    name:'',
+    deviceType: '',
+    runningDuration: '',
+    purpose: '',
+    description: '',
+    location: '',
+    price: ''
 }
 
 export const addManagerInitialValues = {

@@ -148,22 +148,6 @@ const AddCompany = () => {
                   <p className="text-red-500">{formik.errors.companyHead}</p>
                 ) : null}
               </div>
-               {/* <div className="flex flex-col items-start gap-1">
-                <label htmlFor="companyLogo" className=" !text-xs rounded-lg bg-black text-white px-3 py-1 w-[100px] text-center">
-                 ADD LOGO <span className="text-red-500">*</span>
-                </label>
-                <Field
-                  label="companyLogo"
-                  name="companyLogo"
-                  type="file"
-                  className="bg-black text-white px-3 py-1 rounded-md mr-2 w-[150px] absolute opacity-0"
-                  values={formik.values.firstName}
-                  onChange={formik.handleChange}
-                />
-                {formik.errors.companyLogo && formik.touched.companyLogo ? (
-                  <p className="text-red-500">{formik.errors.companyLogo}</p>
-                ) : null}
-              </div>  */}
             </div>
             <Button
               label="Add Company"

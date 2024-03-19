@@ -22,7 +22,7 @@ import { LiaIndustrySolid } from 'react-icons/lia';
 import { IoBookmark } from 'react-icons/io5';
 import { FaSignOutAlt } from "react-icons/fa";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -216,8 +216,8 @@ export default function CommonSideBar() {
             <ListItemButton
               sx={{
                 minHeight: 48,
-                justifyContent: show ? 'initial' : 'center',
-                px: 2.5,
+                justifyContent: show ? 'initial' : 'bottom',
+                px: 4.5,
               }}
               // disabled={!show}
             >
