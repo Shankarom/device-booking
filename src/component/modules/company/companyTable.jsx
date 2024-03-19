@@ -74,24 +74,24 @@ const CompanyTable = () => {
       {
         name: "COMPANY NAME",
         selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.companyName}
+          <p className="text-xs _2xl:text-base">
+          {row?.companyName}
           </p>
         ),
       },
       {
         name: "EMAIL",
         selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.email}
+          <p className="text-xs _2xl:text-base">
+          {row?.email}
           </p>
         ),
       },
       {
         name: "ADDRESS",
         selector: (row, index) => (
-          <p className="text-xs 2xl:text-base">
-            {row?.address}
+          <p className="text-xs _2xl:text-base">
+          {row?.address}
           </p>
         ),
       },
@@ -154,7 +154,7 @@ const CompanyTable = () => {
     ];
   return (
     <>
-    <div className="mx-2 ml-[-24px]">
+    <div className="mx-2 ml-[-40px]">
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="p-1.5 w-full inline-block align-middle">

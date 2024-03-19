@@ -44,7 +44,7 @@ const ManagersScreen = () =>{
       <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
         <div>
         <CommonSideBar/>
-             <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-19px] rounded-lg mt-[1px]">
+             <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-34px] rounded-lg mt-[1px]">
       {showAddManager && (
         <Modal title="Add company" descriptionText={<AddManager/>}closeIcon={handleCloseAddDevice} />
       )}
@@ -66,7 +66,7 @@ const ManagersScreen = () =>{
           Manager
       </p>
       <Button
-        label="Add company"
+        label="Add manager"
         className="bg-black !w-[200px] mt-4 mb-4 mr-2"
         onClick={handleAddDeviceClick}
       />

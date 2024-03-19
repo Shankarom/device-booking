@@ -26,7 +26,7 @@ const handleChange = (event) => {
     <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
     <div>
       <CommonSideBar />
-      <div className="flex items-center mr-4 bg-[#d4d1d1] h-[75px] ml-[-19px] rounded-lg mt-[1px]">
+      <div className="flex items-center mr-4 bg-[#d4d1d1] h-[75px] ml-[-34px] rounded-lg mt-[1px]">
         <div className="relative">
         <input
           type="text"
