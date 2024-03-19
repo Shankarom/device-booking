@@ -76,13 +76,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function CommonSideBar() {
+  const getRole = localStorage.getItem("role")
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const { show, setShow } = useToggleContext();
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    console.log("__________________",)
       // Proceed with logout
       // localStorage.removeItem(role);
       // localStorage.removeItem(userDetails);
@@ -134,6 +134,7 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
+          
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/booking")}>
             <ListItemButton
               sx={{
@@ -164,6 +165,7 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
+          {getRole.userType === 'superadmin' &&(
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/company")}>
             <ListItemButton
               sx={{
@@ -179,6 +181,8 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
+          )}
+          {getRole.userType === 'superadmin' &&(
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/manager")}>
             <ListItemButton
               sx={{
@@ -194,6 +198,7 @@ export default function CommonSideBar() {
               )}
             </ListItemButton>
           </ListItem>
+          )}
           <ListItem disablePadding sx={{ display: 'block' }} onClick={() => navigate("/user")}>
             <ListItemButton
               sx={{
@@ -211,8 +216,9 @@ export default function CommonSideBar() {
           </ListItem>
         </List>
         <Divider />
+        <div className='fixed left-0 bottom-0'>
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut} className='mt-[490px]'>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={handleSignOut} >
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -228,6 +234,8 @@ export default function CommonSideBar() {
             </ListItemButton>
           </ListItem>
         </List>
+        </div>
+        
         <Divider />
       </Drawer>
     </Box>

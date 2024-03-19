@@ -168,6 +168,7 @@ export const DeviceProvider = ({ children }) => {
         }
         else{
           setSearchResults([])
+          toast.error(deviceData.data.message);
         }
       }catch (error) {
         console.log("Error fetching devices:", error);

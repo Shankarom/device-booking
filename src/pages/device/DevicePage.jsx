@@ -10,12 +10,14 @@ import { useToggleContext } from "../../context/ToogleContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { debounce } from "../../utils/utils";
+
 
 function DeviceScreen() {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const params = useParams();
-  const {showAddDevice, setShowAddDevice,searchDevice } = useDeviceContext()
+  const {showAddDevice, setShowAddDevice,searchDevice, deviceList,getDevices } = useDeviceContext()
   const [search, setSearch] = useState("");
 
   const handleChange = (event) => {
@@ -32,26 +34,16 @@ function DeviceScreen() {
   const {show} = useToggleContext()
 
     // Debounce function
-    const debounce = (func, delay) => {
-      let timeoutId;
-      return function (...args) {
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-        timeoutId = setTimeout(() => {
-          func.apply(this, args);
-        }, delay);
-      };
-    };
-  
     useEffect(() => {
       // Debounce search function with 300ms delay
       if(search.length > 0 ){
-        const delayedSearch = debounce(searchDevice, 300);
+        const delayedSearch = debounce(searchDevice, 100);
         // Call the delayed search function when search state changes
         delayedSearch(search);
       }
-    
+      else{
+        getDevices()
+      }
     }, [search]);
 
   return (

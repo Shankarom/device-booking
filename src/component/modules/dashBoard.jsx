@@ -15,6 +15,7 @@ import ProfileDetail from "./dashboardCard/profileDetail";
 const DashboardItem = () => {
   let  {result, getDashboardDevice, deviceCount} = useDashboardContext()
   console.log(result,"🚀 ~ DashboardItem ~ deviceCount:", deviceCount)
+  const getRole = localStorage.getItem("role")
   useEffect(() =>{
     getDashboardDevice()
   },[])

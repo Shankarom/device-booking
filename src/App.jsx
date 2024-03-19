@@ -17,7 +17,7 @@ import {CompanyProvider} from './context/companyContext'
 import LicenseScreen from '../src/pages/license/LicensePage';
 import { LicenseProvider } from './context/licenseContext'
 import AddLicense from './component/modules/license/AddLicense';
-import DashboardScreen from './pages/dashboard/adminDashboard'
+import DashboardScreen from './pages/dashboard/superadminDashboard'
 import { ToggleContextProvider } from './context/ToogleContext';
 import BookingScreen from './pages/bookings/bookingPage';
 import { BookingProvider } from './context/bookingContext';

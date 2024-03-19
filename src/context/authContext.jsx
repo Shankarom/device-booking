@@ -17,19 +17,16 @@ export const AuthProvider = ({ children }) => {
 
 
     const handleLogin = async (values) => {
-        console.log("____________value", values)
-        // getting the values of the login from the props (email, password):
         const loginData = { email: values?.email, password: values?.password };
         setLoading(true);
         try {
           const loginApi = await AuthService.login(loginData);
-          console.log("🚀 ~ handleLogin ~ loginApi:", loginApi)
+          console.log("🚀 ~ handleLogin ~ loginApi:", loginApi.data.data.user)
           if (loginApi.data.success === true) {
             setLoading(false);
             toast.success(loginApi.data.message);
-            console.log(loginApi.data,'loginApi.data')
             localStorage.setItem('token',loginApi.data.data.tokens.refresh.token)
-            localStorage.setItem('userType',loginApi.data.data.user.userType)
+            localStorage.setItem('role',loginApi.data.data.user)
             navigate("/dashboard");
             // role(loginApi.data.data.user.role)
         //     if (loginApi.data.user.roles[0] === "admin") {
