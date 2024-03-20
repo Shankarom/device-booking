@@ -15,7 +15,7 @@ function DeviceScreen() {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const params = useParams();
-  const {showAddDevice, setShowAddDevice,searchDevice } = useDeviceContext()
+  const {showAddDevice, setShowAddDevice,searchDevice, getDevices } = useDeviceContext()
   const [search, setSearch] = useState("");
 
   const handleChange = (event) => {
@@ -50,6 +50,8 @@ function DeviceScreen() {
         const delayedSearch = debounce(searchDevice, 300);
         // Call the delayed search function when search state changes
         delayedSearch(search);
+      } else {
+        getDevices()
       }
     
     }, [search]);

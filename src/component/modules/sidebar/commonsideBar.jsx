@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useToggleContext } from '../../../context/ToogleContext';
 import { GrUserManager } from 'react-icons/gr';
+import { ImUsers } from "react-icons/im";
 import { LiaIndustrySolid } from 'react-icons/lia';
 import { IoBookmark } from 'react-icons/io5';
 import { FaSignOutAlt } from "react-icons/fa";
@@ -203,9 +204,9 @@ export default function CommonSideBar() {
               }}
               // disabled={!show}
             >
-              <GrUserManager size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
+              <ImUsers size={25} className={`${show ? 'mr-4' : 'mr-0'}`} />
               {show && (
-                <ListItemText primary="user" sx={{ opacity: show ? 1 : 0 }} />
+                <ListItemText primary="User" sx={{ opacity: show ? 1 : 0 }} />
               )}
             </ListItemButton>
           </ListItem>

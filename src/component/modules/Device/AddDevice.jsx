@@ -26,12 +26,22 @@ const AddDevice = () => {
                   Name <span className="text-red-500">*</span>
                 </label>
                 <Field
-                  placeHolder="name"
+                  placeholder="name"
                   name="name"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
-                  values={formik.values.name}
-                  onChange={formik.handleChange}
+                  // values={formik.values.name}
+                  // onChange={formik.handleChange}
+                  onBlur={formik?.handleBlur}
+                  onChange={(e) => {
+                    var inputValue = e.target.value;
+                    if (/^\s/.test(inputValue)) {
+                      return;
+                    }
+                    if (/^[a-zA-Z\s]*$/.test(inputValue)) {
+                      formik.setFieldValue("name", inputValue);
+                    }
+                  }}
                 />
                 {formik.errors.name && formik.touched.name ? (
                   <p className="text-red-500">{formik.errors.name}</p>
@@ -42,12 +52,22 @@ const AddDevice = () => {
                   Type <span className="text-red-500">*</span>
                 </label>
                 <Field
-                  placeHolder="deviceType"
+                  placeholder="deviceType"
                   name="deviceType"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
-                  values={formik.values.deviceType}
-                  onChange={formik.handleChange}
+                  // values={formik.values.deviceType}
+                  // onChange={formik.handleChange}
+                  onBlur={formik?.handleBlur}
+                  onChange={(e) => {
+                    var inputValue = e.target.value;
+                    if (/^\s/.test(inputValue)) {
+                      return;
+                    }
+                    if (/^[a-zA-Z\s]*$/.test(inputValue)) {
+                      formik.setFieldValue("deviceType", inputValue);
+                    }
+                  }}
                 />
                 {formik.errors.deviceType && formik.touched.deviceType ? (
                   <p className="text-red-500">{formik.errors.deviceType}</p>
@@ -58,7 +78,7 @@ const AddDevice = () => {
                   Usage Duration <span className="text-red-500">*</span>
                 </label>
                 <Field
-                  placeHolder="runningDuration"
+                  placeholder="runningDuration"
                   name="runningDuration"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
@@ -74,12 +94,22 @@ const AddDevice = () => {
                   Price <span className="text-red-500">*</span>
                 </label>
                 <Field
-                  placeHolder="price"
+                  placeholder="price"
                   name="price"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
-                  values={formik.values.price}
-                  onChange={formik.handleChange}
+                  // values={formik.values.price}
+                  // onChange={formik.handleChange}
+                  onBlur={formik?.handleBlur}
+                  onChange={(e) => {
+                    var inputValue = e.target.value;
+                    if (/^\s/.test(inputValue)) {
+                      return;
+                    }
+                    if (/^[0-9\s]*$/.test(inputValue)) {
+                      formik.setFieldValue("price", inputValue);
+                    }
+                  }}
                 />
                 {formik.errors.price && formik.touched.price ? (
                   <p className="text-red-500">{formik.errors.price}</p>
@@ -90,12 +120,22 @@ const AddDevice = () => {
                   Description <span className="text-red-500"></span>
                 </label>
                 <Field
-                  placeHolder="description"
+                  placeholder="description"
                   name="description"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
-                  values={formik.values.description}
-                  onChange={formik.handleChange}
+                  // values={formik.values.description}
+                  // onChange={formik.handleChange}
+                  onBlur={formik?.handleBlur}
+                  onChange={(e) => {
+                    var inputValue = e.target.value;
+                    if (/^\s/.test(inputValue)) {
+                      return;
+                    }
+                    if (/^[a-zA-Z\s]*$/.test(inputValue)) {
+                      formik.setFieldValue("description", inputValue);
+                    }
+                  }}
                 />
                 {formik.errors.description && formik.touched.description ? (
                   <p className="text-red-500">{formik.errors.description}</p>
@@ -106,12 +146,22 @@ const AddDevice = () => {
                   Purpose <span className="text-red-500"></span>
                 </label>
                 <Field
-                  placeHolder="purpose"
+                  placeholder="purpose"
                   name="purpose"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
-                  values={formik.values.purpose}
-                  onChange={formik.handleChange}
+                  // values={formik.values.purpose}
+                  // onChange={formik.handleChange}
+                  onBlur={formik?.handleBlur}
+                  onChange={(e) => {
+                    var inputValue = e.target.value;
+                    if (/^\s/.test(inputValue)) {
+                      return;
+                    }
+                    if (/^[a-zA-Z\s]*$/.test(inputValue)) {
+                      formik.setFieldValue("purpose", inputValue);
+                    }
+                  }}
                 />
                 {formik.errors.purpose && formik.touched.purpose ? (
                   <p className="text-red-500">{formik.errors.purpose}</p>
@@ -122,7 +172,7 @@ const AddDevice = () => {
                   Location <span className="text-red-500">*</span>
                 </label>
                 <Field
-                  placeHolder="location"
+                  placeholder="location"
                   name="location"
                   type="text"
                   className="!w-full border border-gray-400 text-black px-2 rounded-md h-[30px]"
