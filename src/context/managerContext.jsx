@@ -122,7 +122,7 @@ export const ManagerProvider = ({children}) =>{
         let searchResult = await ManagerService.searchManager(value)
         if (searchResult.data.success) {
           setManagerList(searchResult.data.result.results);
-          setPageDetails(getManagers?.data?.result?.pageDetails)
+          setPageDetails(searchResult?.data?.result?.pageDetails)
         } else {
           setManagerList([]);
           toast.error(searchResult.data.message);
