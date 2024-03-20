@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useUserContext } from "../../../context/userContext";
 import { Link } from "react-router-dom";
 import { ChevronRight } from 'react-feather';
 
 const ProfileDetail = () => {
+    const storedLimit = localStorage.getItem("limit");
   const { getUsers, usersList } = useUserContext()
 
+  const [limit, setLimit] = useState(storedLimit || 10);
+  const [page, setPage] = useState(1);
   useEffect(() => {
-    getUsers();
+    getUsers(limit, page);
   }, []);
 
   return (

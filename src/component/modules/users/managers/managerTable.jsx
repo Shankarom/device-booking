@@ -160,6 +160,14 @@ const ManagerTable = () => {
         )
       },      
     ];
+    const customStyles = {
+      head: {
+        style: {
+          color: "#45267e",
+          display: "flex",
+        },
+      },
+    };
   return (
     <>
     <div className="mx-2 ml-[-42px]">
@@ -189,7 +197,7 @@ const ManagerTable = () => {
                   setPage(page);
                 }}
                 // progressPending={loading}
-                // customStyles={customStyles}
+                customStyles={customStyles}
               />
             </div>
             </div>  

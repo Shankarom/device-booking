@@ -40,6 +40,7 @@ const ManagersScreen = () =>{
     const delayedSearch = debounce(searchManager, 300);
     delayedSearch(search);
   }, [search]);
+  
     return(
       <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
         <div>
@@ -63,7 +64,7 @@ const ManagersScreen = () =>{
       </div>
       <p
         className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
-          Manager
+          MANAGERS
       </p>
       <Button
         label="Add manager"

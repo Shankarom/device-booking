@@ -65,7 +65,7 @@ const {
 };
   const columns = [
     {
-      name: "Company",
+      name: "COMPANY",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
       {row?.companyName ? row.companyName.charAt(0).toUpperCase() + row.companyName.slice(1).toLowerCase() : ''}
@@ -73,7 +73,7 @@ const {
       ),
     },
     {
-      name: "Device",
+      name: "DEVICE",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
       {row?.deviceName ? row.deviceName.charAt(0).toUpperCase() + row.deviceName.slice(1).toLowerCase() : ''}
@@ -81,7 +81,7 @@ const {
       ),
     },
     {
-      name: "User",
+      name: "USER",
       selector: (row, index) => (
         <p className=" text-xs _2xl:text-base">
       {row?.userFirstName ? row.userFirstName.charAt(0).toUpperCase() + row.userFirstName.slice(1).toLowerCase() : ''}
@@ -89,7 +89,7 @@ const {
       ),
     },
     {
-      name: "Email",
+      name: "EMAIL",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
       {row?.userEmail}
@@ -97,7 +97,7 @@ const {
       ),
     },
     {
-      name: "Company plan",
+      name: "COMPANY PLAN",
       selector: (row, index) => (
       <p className="text-xs _2xl:text-base">
       {row?.licenseName ? row.licenseName.charAt(0).toUpperCase() + row.licenseName.slice(1).toLowerCase() : ''}
@@ -106,7 +106,7 @@ const {
       ),
     },
     {
-      name: "Request time",
+      name: "REQUEST TIME",
       selector: (row, index) => (
       <p className="text-xs _2xl:text-base">
       {moment(row?.updatedAt).format('llll')}
@@ -115,7 +115,7 @@ const {
       ),
     },
     {
-      name: "Booking status",
+      name: "BOOKING STATUS",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
        {row?.bookingStatus ? row.bookingStatus.charAt(0).toUpperCase() + row.bookingStatus.slice(1).toLowerCase() : ''}
@@ -160,6 +160,14 @@ const {
     // },
 
   ];
+  const customStyles = {
+    head: {
+      style: {
+        color: "#45267e",
+        display: "flex",
+      },
+    },
+  };
   return (
     <>
     <div className="mx-2 ml-[-40px]">
@@ -203,7 +211,7 @@ const {
                         }}
                       />
                     }
-                  // customStyles={customStyles}
+                  customStyles={customStyles}
                   />
                 </div>
               </div>

@@ -17,11 +17,11 @@ function DeviceScreen() {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const params = useParams();
-  const {showAddDevice, setShowAddDevice,searchDevice,getDevices } = useDeviceContext()
+  const { showAddDevice, setShowAddDevice, searchDevice, getDevices } = useDeviceContext()
   const [search, setSearch] = useState("");
 
   const handleChange = (event) => {
-      setSearch(event.target.value);
+    setSearch(event.target.value);
   };
 
   const handleAddDeviceClick = () => {
@@ -31,53 +31,51 @@ function DeviceScreen() {
   const handleCloseAddDevice = () => {
     setShowAddDevice(false);
   };
-  const {show} = useToggleContext()
+  const { show } = useToggleContext()
 
-    // Debounce function
-    useEffect(() => {
-      // Debounce search function with 300ms delay
-      if(search.length > 0 ){
-        const delayedSearch = debounce(searchDevice, 100);
-        // Call the delayed search function when search state changes
-        delayedSearch(search);
-      } else {
-        getDevices()
-      }
-    }, [search]);
+  useEffect(() => {
+    // Debounce search function with 300ms delay
+    if (search.length > 0) {
+      const delayedSearch = debounce(searchDevice, 300);
+      // Call the delayed search function when search state changes
+      delayedSearch(search);
+    }
+
+  }, [search]);
 
   return (
     <div className={`transition-all duration-300 ease-in-out m-auto pt-[90px]  ${show ? 'pl-[270px]' : 'pl-[100px]'}`}>
       <div>
-      <CommonSideBar />
-      <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-34px] rounded-lg mt-[1px]">
-      {showAddDevice && (
-        <Modal title="Add device" descriptionText={<AddDevice/>}closeIcon={handleCloseAddDevice} />
-      )}
+        <CommonSideBar />
+        <div className="flex justify-between items-center mr-4 bg-[#d4d1d1] ml-[-34px] rounded-lg mt-[1px]">
+          {showAddDevice && (
+            <Modal title="Add device" descriptionText={<AddDevice />} closeIcon={handleCloseAddDevice} />
+          )}
 
-        <div className="relative">
-        <input
-          type="text"
-          className="border rounded-lg pl-10 py-2 focus:outline-none focus:ring focus:border-blue-300 ml-2"
-          placeholder="Search..."
-          value={search}
-          onChange={handleChange}
-        />
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
-          <FontAwesomeIcon icon={faSearch} className="text-gray-500 pl-2" />
+          <div className="relative">
+            <input
+              type="text"
+              className="border rounded-lg pl-10 py-2 focus:outline-none focus:ring focus:border-blue-300 ml-2"
+              placeholder="Search..."
+              value={search}
+              onChange={handleChange}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none ">
+              <FontAwesomeIcon icon={faSearch} className="text-gray-500 pl-2" />
+            </div>
+          </div>
+          <p
+            className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
+            DEVICES
+          </p>
+          <Button
+            label="Add Device"
+            className="bg-black !w-[200px] mt-4 mb-4 mr-2"
+            onClick={handleAddDeviceClick}
+          />
         </div>
-      </div>
-      <p
-        className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
-          Devices
-      </p>
-      <Button
-        label="Add Device"
-        className="bg-black !w-[200px] mt-4 mb-4 mr-2"
-        onClick={handleAddDeviceClick}
-      />
-      </div>
-        
-      <DeviceTable/>
+
+        <DeviceTable />
       </div>
     </div>
   );

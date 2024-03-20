@@ -14,7 +14,6 @@ import { debounce } from "../../utils/utils";
 function CompanyScreen() {
   const {showAddCompany, setShowAddCompany, searchCompany} = useCompanyContext()
   const [search, setSearch] = useState("");
-  console.log("🚀 ~ CompanyScreen ~ search:", search)
 
   const handleChange = (event) => {
       setSearch(event.target.value);
@@ -60,7 +59,7 @@ function CompanyScreen() {
       </div>
       <p
         className=" mt-4 mb-4 flex justify-between items-center space-x-2  font-semibold">
-          Company
+          COMPANY
       </p>
       <Button
         label="Add company"

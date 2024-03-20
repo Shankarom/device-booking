@@ -15,7 +15,6 @@ export const BookingProvider = ({children}) =>{
         setLoading(false)
         try{
             const bookingDetails =  await BookingService.getBookingDetails()
-            console.log("🚀 ~ getBookingDetails ~ bookingDetails:", bookingDetails)
             if(bookingDetails.data.success == true){
              setBookingList(bookingDetails.data.result.results);
              setPageDetails(bookingDetails?.data?.result?.pageDetails)

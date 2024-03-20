@@ -148,7 +148,7 @@ export const DeviceProvider = ({ children }) => {
           if (getDeviceByManager.data.success == true) {
             // setMachineOrders(getVendorAndMachineOrder?.data?.result?.results);
             setDeviceList(getDeviceByManager?.data?.result?.results);
-            setManagerDevice(getDeviceByManager?.data?.result?.results)
+            // setManagerDevice(getDeviceByManager?.data?.result?.results)
           } else {
             // setMachineOrders([]);
             setDeviceList([]);

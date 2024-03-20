@@ -7,8 +7,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useBookingContext } from "../../context/bookingContext"
 import { debounce } from "../../utils/utils";
 
-
-
 function BookingScreen() {
   let {searchBooking} = useBookingContext()
   const [search, setSearch] = useState("");
@@ -42,7 +40,7 @@ const handleChange = (event) => {
       <div className="ml-96">
       <p
         className=" mt-4 mb-4 space-x-2  font-semibold ml-24">
-          Bookings
+          BOOKINGS
       </p>
       </div>
       </div>

@@ -28,7 +28,7 @@ export const CompanyProvider = ({children}) =>{
             }
             else{
                 setCompanyList([])
-            toast.error(getManagers.data.message);
+            toast.error(getCompany.data.message);
             }
 
         }catch(error){

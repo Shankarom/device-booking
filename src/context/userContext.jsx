@@ -11,16 +11,17 @@ export const UserProvider = ({children}) =>{
     const [usersList, setUsersList] = useState([])
     const [updateManagerModal, setUpdateManagerModal] = useState(false);
     const [deleteManagerModal, setDeleteManagerModal] = useState(true)
+    const [pageDetails, setPageDetails] = useState([]);
 
-    const navigate = useNavigate()
-
-    const getUsers = async () => {
+    const getUsers = async (page, limit) => {
+        console.log("🚀 ~ getUsers ~ limit:", limit)
+        console.log("🚀 ~ getUsers ~ page:", page)
         setLoading(true);
         try {
-          const getUsers = await UserService.getUsers();
+          const getUsers = await UserService.getUsers(page, limit);
           if (getUsers.data.success) {
             setUsersList(getUsers.data.result.results);
-            // setPagination(getUsers?.data?.result?.)
+            setPageDetails(getUsers?.data?.result?.pageDetails)
             // toast.success(getUsers.data.message);
           } else {
             setUsersList([]);
@@ -44,7 +45,7 @@ export const UserProvider = ({children}) =>{
           const getCompanyAssociatedUsers =
           await UserService.getCompanyAssociatedUsers({
             companyId,
-            pageSize: limit,
+            limit,
             page,
           });
           // console.log("🚀 ~ DeviceProvider ~ getCompanyAssociatedUsers:", getCompanyAssociatedUsers)
@@ -106,7 +107,6 @@ export const UserProvider = ({children}) =>{
         }
 
       } catch (error) {
-        console.log("🚀 ~ deleteDevice ~ error:", error)
         if (error.response && error.response.status === 400) {
           setLoading(false);
           setDeleteDeviceModal(false);
@@ -119,17 +119,32 @@ export const UserProvider = ({children}) =>{
         }
       }
     }
+    const getUserListBySearch =  async (value) =>{
+      setLoading(false)
+      try{
+          const userList =  await UserService.getUserListBySearch(value)
+          if(userList.data.success == true){
+           setUsersList(userList.data.result.results);
+          //  setPageDetails(userList?.data?.result?.pageDetails)
+      }
+     }
+     catch (error) {
+      toast.error("An error occurred while fetching devices");
+    }
+  }
     return(
         <userContext.Provider
         value={{
             usersList,
             updateManagerModal,
+            pageDetails,
             updateManagers,
             setDeleteManagerModal,
             deleteManager,
             getUsers,
             setUpdateManagerModal,
-            getCompanyUsers
+            getCompanyUsers,
+            getUserListBySearch
         }}
         >
             {children}

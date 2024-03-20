@@ -13,7 +13,6 @@ import { customStyles } from '../../../utils/utils';
 
 const CompanyTable = () => {
   const storedLimit = localStorage.getItem("limit");
-  
   const [limit, setLimit] = useState(storedLimit || 10);
   const [page, setPage] = useState(1);
   const [existingData, setExistingData] = useState(null);
@@ -152,6 +151,14 @@ const CompanyTable = () => {
         ),
       },      
     ];
+    const customStyles = {
+      head: {
+        style: {
+          color: "#45267e",
+          display: "flex",
+        },
+      },
+    };
   return (
     <>
     <div className="mx-2 ml-[-40px]">
@@ -175,7 +182,6 @@ const CompanyTable = () => {
                 paginationTotalRows={pageDetails?.totalResults}
                 paginationPerPage={limit}
                 onChangeRowsPerPage={(perPage) => {
-                  {console.log("pageDetails?.totalResults _______",pageDetails?.totalResults)}
                   localStorage.setItem("limit", perPage);
                   // setLimit(parseInt(perPage, 10));                 
                 }}

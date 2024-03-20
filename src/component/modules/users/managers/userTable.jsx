@@ -12,13 +12,10 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const UserTable = () => {
     const params = useParams();
-
-    const [limit, setLimit] = useState(10);
+    const storedLimit = localStorage.getItem("limit");
+    const [limit, setLimit] = useState(storedLimit || 10);
     const [page, setPage] = useState(1);
     const [existingData, setExistingData] = useState(null);
-
-    const [result, setResult] = useState([]);
-    const [pageDetails, setPageDetails] = useState([]);
 
     const {
         loading,
@@ -30,7 +27,7 @@ const UserTable = () => {
         setDeviceId,
         updateDeviceModal,
         deleteDevice,
-        pagination,
+        pageDetails,
         getCompanyUsers
     } = useUserContext()
 
@@ -50,57 +47,58 @@ const UserTable = () => {
         if (jwt && params.companyId) {
             getCompanyUsers(params.companyId, limit, page);
         } else if (jwt && (params.companyId == null || !params.companyId || params.companyId == "")) {
-            fetchData(limit, page);
+
+            getUsers(limit, page);
         }
     }, [limit, page, jwt, params.companyId]);
 
-    const fetchData = (searchKey = "", searchTerm = "") => {
-        getUsers(limit, page, searchTerm, searchKey)
-            .then(response => {
-                setResult(response.result.results);
-                setPageDetails(response.result.results.pageDetails);
-            })
-            .catch(error => {
-                // Handle error
-                console.error('Error fetching data:', error);
-            });
-    };
+    // const fetchData = (searchKey = "", searchTerm = "") => {
+    //     getUsers(limit, page, searchTerm, searchKey)
+    //         .then(response => {
+    //             setResult(response.result.results);
+    //             setPageDetails(response.result.results.pageDetails);
+    //         })
+    //         .catch(error => {
+    //             // Handle error
+    //             console.error('Error fetching data:', error);
+    //         });
+    // };
 
     const columns = [
         {
-            name: "Name",
+            name: "NAME",
             selector: (row, index) => (
-                <p className="text-xs 2xl:text-base">
+                <p className="text-xs _2xl:text-base">
                     {row?.firstName} {row?.lastName}
                 </p>
             ),
         },
         {
-            name: "Email",
+            name: "EMAIL",
             selector: (row, index) => (
-                <p className="text-xs 2xl:text-base">
+                <p className="text-xs _2xl:text-base">
                     {row?.email}
                 </p>
             ),
         },
         {
-            name: "Company Name",
+            name: "COMPANY NAME",
             selector: (row, index) => (
-                <p className="text-xs 2xl:text-base">
+                <p className="text-xs _2xl:text-base">
                     {row?.companyName}
                 </p>
             ),
         },
         {
-            name: "Created at",
+            name: "CREATED AT",
             selector: (row, index) => (
-                <p className="text-xs 2xl:text-base">
+                <p className="text-xs _2xl:text-base">
                     {moment(row?.createdAt).format('lll')}
                 </p>
             ),
         },
         {
-            name: "Action",
+            name: "ACTION",
             selector: (row) => (
                 <div className='flex justify-between items-center gap-4'>
                     <div
@@ -137,6 +135,14 @@ const UserTable = () => {
         },
 
     ];
+    const customStyles = {
+        head: {
+          style: {
+            color: "#45267e",
+            display: "flex",
+          },
+        },
+      };
     return (
         <>
             <div className="mx-2 ml-[-40px]">
@@ -153,21 +159,23 @@ const UserTable = () => {
                                         pagination
                                         paginationServer
                                         // fixedHeader
-                                        // highlightOnHover
+                                        highlightOnHover
                                         // responsive
                                         noDataComponent={<h4>No Users found</h4>}
-                                        paginationRowsPerPageOptions={[20, 30, 40, 80, 100]}
-                                        paginationTotalRows={pagination?.totalResults}
+                                        paginationRowsPerPageOptions={[10, 20, 30, 40]}
+                                        paginationTotalRows={pageDetails?.totalResults}
                                         paginationPerPage={limit}
                                         onChangeRowsPerPage={(perPage) => {
-                                            setLimit(perPage);
-                                        }}
+                                            console.log("🚀 ~ UserTable ~ perPage:", perPage)
+                                            localStorage.setItem("limit", perPage);
+                                            // setLimit(parseInt(perPage, 10));                 
+                                          }}
                                         onChangePage={(page) => {
                                             setPage(page);
                                         }}
 
                                         progressPending={loading}
-                                    // customStyles={customStyles}
+                                        customStyles={customStyles}
                                     />
                                 </div>
                             </div>

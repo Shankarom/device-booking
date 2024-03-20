@@ -53,7 +53,7 @@ const fetchData = () => {
 };
   const columns = [
     {
-      name: "Name",
+      name: "NAME",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
           {row?.name}
@@ -61,7 +61,7 @@ const fetchData = () => {
       ),
     },
     {
-      name: "Location",
+      name: "LOCATION",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
           {row?.location}
@@ -69,7 +69,7 @@ const fetchData = () => {
       ),
     },
     {
-      name: "Device type",
+      name: "DEVICE TYPE",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
           {row?.deviceType}
@@ -77,7 +77,7 @@ const fetchData = () => {
       ),
     },
     {
-      name: "Price",
+      name: "PRICE",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
          {row?.price}
@@ -85,7 +85,7 @@ const fetchData = () => {
       ),
     },
     {
-      name:"Use Time",
+      name:"USE TIME",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
           {row?.runningDuration}
@@ -93,7 +93,7 @@ const fetchData = () => {
       ),
     },
     {
-      name: "Last active",
+      name: "LAST ACTIVE",
       selector: (row, index) => (
         <p className="text-xs _2xl:text-base">
           {moment(row?.updatedAt).format('lll')}
@@ -102,7 +102,7 @@ const fetchData = () => {
     },
 
     {
-      name: "Action",
+      name: "ACTION",
       selector: (row) => (
         <div className='flex justify-between items-center gap-4'>
           <div
